@@ -1,0 +1,15 @@
+﻿{
+	"logPath": "D",
+	"services": [
+		{
+			"command": "cmd",
+			"arguments": "",
+			"initialDirectory": ""
+		},
+		{
+			"command": "notepad",
+			"arguments": "",
+			"initialDirectory": ""
+		},
+	]
+}

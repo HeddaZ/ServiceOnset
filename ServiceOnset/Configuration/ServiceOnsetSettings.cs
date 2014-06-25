@@ -24,7 +24,8 @@ namespace ServiceOnset.Configuration
 
                 XmlNode node = this.Section.ChildNodes.OfType<XmlNode>()
                     .FirstOrDefault(n => n.NodeType == XmlNodeType.Element && n.Name == normalizedElementName);
-
+                result = null;
+                return true;
             }
             else
             {
