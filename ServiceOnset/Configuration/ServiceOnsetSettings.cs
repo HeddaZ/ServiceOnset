@@ -19,8 +19,18 @@ namespace ServiceOnset.Configuration
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            
-            
+            if (!string.IsNullOrWhiteSpace(  binder.Name)){
+                string normalizedElementName = binder.Name.Substring(0, 1).ToLower() + binder.Name.Substring(1);
+
+                XmlNode node = this.Section.ChildNodes.OfType<XmlNode>()
+                    .FirstOrDefault(n => n.NodeType == XmlNodeType.Element && n.Name == normalizedElementName);
+
+            }
+            else
+            {
+                result=null;
+                return false;
+            }
         }
     }
 }
