@@ -9,15 +9,16 @@ using System.Text;
 
 namespace ServiceOnset
 {
-    public partial class ContainerService : ServiceBase
+    public partial class HostService : ServiceBase
     {
-        public ContainerService()
+        public HostService()
         {
             InitializeComponent();
         }
 
         protected override void OnStart(string[] args)
         {
+            //Process.Start(Process.Start())
         }
 
         protected override void OnStop()

@@ -42,11 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerService.cs">
+    <Compile Include="AppHelper.cs" />
+    <Compile Include="Configuration\ServiceOnsetConfig.cs" />
+    <Compile Include="Configuration\ServiceOnsetSectionHandler.cs" />
+    <Compile Include="HostService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ContainerService.Designer.cs">
-      <DependentUpon>ContainerService.cs</DependentUpon>
+    <Compile Include="HostService.Designer.cs">
+      <DependentUpon>HostService.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

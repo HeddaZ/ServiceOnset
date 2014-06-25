@@ -1,6 +1,6 @@
 ﻿namespace ServiceOnset
 {
-    partial class ContainerService
+    partial class HostService
     {
         /// <summary> 
         /// Required designer variable.
