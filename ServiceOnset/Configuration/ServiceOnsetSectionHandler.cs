@@ -14,7 +14,7 @@ namespace ServiceOnset.Configuration
         {
             ServiceOnsetConfig config = new ServiceOnsetConfig();
 
-            #region appSettings
+            #region Settings
 
             //foreach (XmlAttribute xmlAttribute in section.Attributes)
             //{

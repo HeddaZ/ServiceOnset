@@ -45,6 +45,7 @@
     <Compile Include="AppHelper.cs" />
     <Compile Include="Configuration\ServiceOnsetConfig.cs" />
     <Compile Include="Configuration\ServiceOnsetSectionHandler.cs" />
+    <Compile Include="Configuration\ServiceOnsetSettings.cs" />
     <Compile Include="HostService.cs">
       <SubType>Component</SubType>
     </Compile>
