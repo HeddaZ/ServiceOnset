@@ -16,7 +16,7 @@ namespace ServiceOnset
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
             { 
-                new HostService() 
+                new ServiceHost() 
             };
             ServiceBase.Run(ServicesToRun);
         }

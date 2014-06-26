@@ -44,23 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHelper.cs" />
-    <Compile Include="Configuration\ServiceOnsetConfig.cs" />
-    <Compile Include="Configuration\ServiceOnsetSectionHandler.cs" />
-    <Compile Include="Configuration\ServiceOnsetSettings.cs" />
-    <Compile Include="HostService.cs">
+    <Compile Include="Common\ServiceOnsetConfig.cs" />
+    <Compile Include="ServiceHost.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HostService.Designer.cs">
-      <DependentUpon>HostService.cs</DependentUpon>
+    <Compile Include="ServiceHost.Designer.cs">
+      <DependentUpon>ServiceHost.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ServiceOnset.json">
+    <None Include="ServiceOnset.exe.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

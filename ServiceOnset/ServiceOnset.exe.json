@@ -1,10 +1,12 @@
 ﻿{
-	"logPath": "D",
+	"logDirectory": "D:\\",
 	"services": [
 		{
 			"command": "cmd",
 			"arguments": "",
-			"initialDirectory": ""
+			"initialDirectory": "",
+			"runMode": Interval,
+			"intervalInSeconds": 10
 		},
 		{
 			"command": "notepad",
