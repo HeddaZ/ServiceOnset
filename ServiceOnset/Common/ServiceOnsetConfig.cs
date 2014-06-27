@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
 
 namespace ServiceOnset.Common
 {
-    [DataContract]
-    public class ServiceOnsetConfig
+    public partial class ServiceOnsetConfig : IServiceOnsetConfig
     {
         #region 静态方法
 
@@ -34,36 +32,62 @@ namespace ServiceOnset.Common
 
         #endregion
 
-        [DataMember(Name = "logPath")]
-        public string LogPath { get; set; }
-
-        [DataMember(Name = "services")]
-        public ServiceOnsetService[] Services { get; set; }
+        public string LogPath
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(_logPath) ? _logPath : AppHelper.AppDirectory;
+            }
+        }
+        public IServiceOnsetService[] Services
+        {
+            get
+            {
+                return _services;
+            }
+        }
     }
 
-    [DataContract]
-    public class ServiceOnsetService
+    public partial class ServiceOnsetService : IServiceOnsetService
     {
-        [DataMember(Name = "command")]
-        public string Command { get; set; }
-        [DataMember(Name = "arguments")]
-        public string Arguments { get; set; }
-        [DataMember(Name = "initialDirectory")]
-        public string InitialDirectory { get; set; }
-        [DataMember(Name = "runMode")]
-        public ServiceRunModel RunMode { get; set; }
-        [DataMember(Name = "intervalInSeconds")]
-        public int IntervalInSeconds { get; set; }
-    }
-
-    [DataContract]
-    public enum ServiceRunModel
-    {
-        [EnumMember]
-        Daemon = 0,
-        [EnumMember]
-        Launch = 1,
-        [EnumMember]
-        Interval = 2
+        public string Command
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_command))
+                {
+                    throw new Exception("Invalid command!");
+                }
+                return _command;
+            }
+        }
+        public string Arguments
+        {
+            get
+            {
+                return _arguments;
+            }
+        }
+        public string InitialDirectory
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(_initialDirectory) ? _initialDirectory : Path.GetDirectoryName(this.Command);
+            }
+        }
+        public ServiceRunModel RunMode
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(_runMode) ? (ServiceRunModel)Enum.Parse(typeof(ServiceRunModel), _runMode, true) : ServiceRunModel.Daemon;
+            }
+        }
+        public int IntervalInSeconds
+        {
+            get
+            {
+                return _intervalInSeconds > 0 ? _intervalInSeconds : 60;
+            }
+        }
     }
 }

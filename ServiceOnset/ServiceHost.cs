@@ -18,7 +18,7 @@ namespace ServiceOnset
 
         protected override void OnStart(string[] args)
         {
-            //Process.Start(Process.Start())
+            //Process.Start()
         }
 
         protected override void OnStop()

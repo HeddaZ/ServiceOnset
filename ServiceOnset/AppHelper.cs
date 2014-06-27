@@ -16,9 +16,9 @@ namespace ServiceOnset
 
         #region 配置单例
 
-        private static ServiceOnsetConfig _config;
+        private static IServiceOnsetConfig _config;
         private static object _configMutex = new object();
-        public static ServiceOnsetConfig Config
+        public static IServiceOnsetConfig Config
         {
             get
             {
