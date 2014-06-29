@@ -7,7 +7,6 @@ namespace ServiceOnset.Common
 {
     public interface IServiceOnsetConfig
     {
-        string LogPath { get; }
         IServiceOnsetService[] Services { get; }
     }
 
@@ -16,7 +15,7 @@ namespace ServiceOnset.Common
         string Command { get; }
         string Arguments { get; }
         string InitialDirectory { get; }
-        ServiceRunModel RunMode { get; }
+        ServiceRunMode RunMode { get; }
         int IntervalInSeconds { get; }
     }
 }

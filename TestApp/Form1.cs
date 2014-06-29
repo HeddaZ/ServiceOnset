@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceOnset;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,14 @@ namespace TestApp
         {
             InitializeComponent();
 
-            var config = ServiceOnset.AppHelper.Config;
+            var config = AppHelper.Config;
+
+            var log = AppHelper.Log;
+
+            for (int i = 0; i < 10;i++ )
+                log.Info("wwwwwwww, heeda"+i.ToString());
+            
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)

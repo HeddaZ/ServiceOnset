@@ -9,8 +9,6 @@ namespace ServiceOnset.Common
     [DataContract]
     public partial class ServiceOnsetConfig
     {
-        [DataMember(Name = "logPath")]
-        private string _logPath;
         [DataMember(Name = "services")]
         private ServiceOnsetService[] _services;
     }

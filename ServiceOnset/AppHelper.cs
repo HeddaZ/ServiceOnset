@@ -1,10 +1,13 @@
-﻿using ServiceOnset.Common;
+﻿using log4net;
+using ServiceOnset.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
+[assembly: log4net.Config.DOMConfigurator(ConfigFile = "log4net.config")]
 
 namespace ServiceOnset
 {
@@ -14,7 +17,7 @@ namespace ServiceOnset
         public static readonly string AppDirectory = Path.GetDirectoryName(AppPath);
         public static readonly string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        #region 配置单例
+        #region 配置
 
         private static IServiceOnsetConfig _config;
         private static object _configMutex = new object();
@@ -33,6 +36,30 @@ namespace ServiceOnset
                     }
                 }
                 return _config;
+            }
+        }
+
+        #endregion
+
+        #region 日志
+
+        private static ILog _log;
+        private static object _logMutex = new object();
+        public static ILog Log
+        {
+            get
+            {
+                if (_log == null)
+                {
+                    lock (_logMutex)
+                    {
+                        if (_log == null)
+                        {
+                            _log = LogManager.GetLogger(typeof(AppHelper)); // root config node
+                        }
+                    }
+                }
+                return _log;
             }
         }
 

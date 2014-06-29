@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ServiceOnset.Common
 {
-    public enum ServiceRunModel
+    public enum ServiceRunMode
     {
         Daemon,
         Launch,

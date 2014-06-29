@@ -32,13 +32,6 @@ namespace ServiceOnset.Common
 
         #endregion
 
-        public string LogPath
-        {
-            get
-            {
-                return !string.IsNullOrWhiteSpace(_logPath) ? _logPath : AppHelper.AppDirectory;
-            }
-        }
         public IServiceOnsetService[] Services
         {
             get
@@ -75,11 +68,11 @@ namespace ServiceOnset.Common
                 return !string.IsNullOrWhiteSpace(_initialDirectory) ? _initialDirectory : Path.GetDirectoryName(this.Command);
             }
         }
-        public ServiceRunModel RunMode
+        public ServiceRunMode RunMode
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(_runMode) ? (ServiceRunModel)Enum.Parse(typeof(ServiceRunModel), _runMode, true) : ServiceRunModel.Daemon;
+                return !string.IsNullOrWhiteSpace(_runMode) ? (ServiceRunMode)Enum.Parse(typeof(ServiceRunMode), _runMode, true) : ServiceRunMode.Daemon;
             }
         }
         public int IntervalInSeconds
