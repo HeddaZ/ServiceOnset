@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-[assembly: log4net.Config.DOMConfigurator(ConfigFile = "log4net.config")]
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
 namespace ServiceOnset
 {

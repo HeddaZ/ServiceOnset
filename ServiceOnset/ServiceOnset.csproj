@@ -47,9 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHelper.cs" />
-    <Compile Include="Core\IServiceHelper.cs" />
     <Compile Include="Common\IServiceOnsetConfig.cs" />
-    <Compile Include="Core\ServiceHelper.cs" />
     <Compile Include="Common\ServiceOnsetConfig.cs" />
     <Compile Include="Common\ServiceOnsetConfigDataContract.cs" />
     <Compile Include="Common\ServiceRunModel.cs" />
@@ -61,6 +59,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceManager.cs" />
+    <Compile Include="Services\DaemonService.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="log4net.config">

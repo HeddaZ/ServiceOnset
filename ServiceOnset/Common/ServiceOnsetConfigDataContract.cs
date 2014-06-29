@@ -10,11 +10,11 @@ namespace ServiceOnset.Common
     public partial class ServiceOnsetConfig
     {
         [DataMember(Name = "services")]
-        private ServiceOnsetService[] _services;
+        private ServiceStartInfo[] _starInfos;
     }
 
     [DataContract]
-    public partial class ServiceOnsetService
+    public partial class ServiceStartInfo
     {
         [DataMember(Name = "command")]
         private string _command;
@@ -26,5 +26,7 @@ namespace ServiceOnset.Common
         private string _runMode;
         [DataMember(Name = "intervalInSeconds")]
         private int _intervalInSeconds;
+        [DataMember(Name = "useShellExecute")]
+        private bool _useShellExecute;
     }
 }

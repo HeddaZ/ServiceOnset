@@ -7,15 +7,16 @@ namespace ServiceOnset.Common
 {
     public interface IServiceOnsetConfig
     {
-        IServiceOnsetService[] Services { get; }
+        List<IServiceStartInfo> StartInfos { get; }
     }
 
-    public interface IServiceOnsetService
+    public interface IServiceStartInfo
     {
         string Command { get; }
         string Arguments { get; }
         string InitialDirectory { get; }
         ServiceRunMode RunMode { get; }
         int IntervalInSeconds { get; }
+        bool UseShellExecute { get; }
     }
 }

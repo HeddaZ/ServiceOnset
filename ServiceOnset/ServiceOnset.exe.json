@@ -5,18 +5,14 @@
 			"arguments": "",
 			"initialDirectory": "",
 			"runMode": "interval",
-			"intervalInSeconds": 10
+			"intervalInSeconds": 10,
+			"useShellExecute": true
 		},
 		{
 			"command": "notepad",
 			"arguments": "",
 			"initialDirectory": "",
 			"intervalInSeconds": -1
-		},
-		{
-			"command": "notepad222",
-			"arguments": "",
-			"initialDirectory": ""
 		},
 	]
 }

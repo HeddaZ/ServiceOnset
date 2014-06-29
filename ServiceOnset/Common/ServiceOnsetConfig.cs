@@ -32,16 +32,20 @@ namespace ServiceOnset.Common
 
         #endregion
 
-        public IServiceOnsetService[] Services
+        private ServiceOnsetConfig()
+        {
+        }
+
+        public List<IServiceStartInfo> StartInfos
         {
             get
             {
-                return _services;
+                return _starInfos.OfType<IServiceStartInfo>().ToList();
             }
         }
     }
 
-    public partial class ServiceOnsetService : IServiceOnsetService
+    public partial class ServiceStartInfo : IServiceStartInfo
     {
         public string Command
         {
@@ -80,6 +84,13 @@ namespace ServiceOnset.Common
             get
             {
                 return _intervalInSeconds > 0 ? _intervalInSeconds : 60;
+            }
+        }
+        public bool UseShellExecute
+        {
+            get
+            {
+                return _useShellExecute;
             }
         }
     }

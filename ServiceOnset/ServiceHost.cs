@@ -18,7 +18,8 @@ namespace ServiceOnset
 
         protected override void OnStart(string[] args)
         {
-            //Process.Start()
+            ServiceManager m = new ServiceManager(AppHelper.Config);
+            m.Run();
         }
 
         protected override void OnStop()

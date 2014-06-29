@@ -17,14 +17,9 @@ namespace TestApp
         {
             InitializeComponent();
 
-            var config = AppHelper.Config;
 
-            var log = AppHelper.Log;
-
-            for (int i = 0; i < 10;i++ )
-                log.Info("wwwwwwww, heeda"+i.ToString());
-            
-            
+            ServiceManager m = new ServiceManager(AppHelper.Config);
+            m.Run();
         }
 
         private void Form1_Load(object sender, EventArgs e)
