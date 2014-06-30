@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
 
-namespace ServiceOnset.Common
+namespace ServiceOnset.Config
 {
     public partial class ServiceOnsetConfig : IServiceOnsetConfig
     {
@@ -36,24 +36,35 @@ namespace ServiceOnset.Common
         {
         }
 
-        public List<IServiceStartInfo> StartInfos
+        public IServiceStartInfo[] StartInfos
         {
             get
             {
-                return _starInfos.OfType<IServiceStartInfo>().ToList();
+                return _startInfos.OfType<IServiceStartInfo>().ToArray();
             }
         }
     }
 
     public partial class ServiceStartInfo : IServiceStartInfo
     {
+        public string Name
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_name))
+                {
+                    throw new Exception("Invalid name.");
+                }
+                return _name;
+            }
+        }
         public string Command
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(_command))
                 {
-                    throw new Exception("Invalid command!");
+                    throw new Exception("Invalid command.");
                 }
                 return _command;
             }
@@ -83,7 +94,7 @@ namespace ServiceOnset.Common
         {
             get
             {
-                return _intervalInSeconds > 0 ? _intervalInSeconds : 60;
+                return _intervalInSeconds > 0 ? _intervalInSeconds : 30;
             }
         }
         public bool UseShellExecute

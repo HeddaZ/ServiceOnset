@@ -1,4 +1,4 @@
-﻿using ServiceOnset.Common;
+﻿using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;

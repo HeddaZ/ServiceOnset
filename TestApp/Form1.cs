@@ -19,7 +19,7 @@ namespace TestApp
 
 
             ServiceManager m = new ServiceManager(AppHelper.Config);
-            m.Run();
+            m.RunServices();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace TestApp
             textBox1.Text += "\r\n" + ServiceOnset.AppHelper.AppPath;
             textBox1.Text += "\r\n" + ServiceOnset.AppHelper.AppVersion;
 
-            
+
         }
     }
 }

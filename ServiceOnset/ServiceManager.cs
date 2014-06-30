@@ -1,4 +1,4 @@
-﻿using ServiceOnset.Common;
+﻿using ServiceOnset.Config;
 using ServiceOnset.Services;
 using System;
 using System.Collections.Generic;
@@ -9,16 +9,19 @@ namespace ServiceOnset
 {
     public class ServiceManager
     {
-        private List<IService> Services { get; set; }
+        private List<IService> InnerServices { get; set; }
 
         public ServiceManager(IServiceOnsetConfig config)
         {
-            this.Services = config.StartInfos.Select(s => ServiceFactory.Instance.Create(s)).ToList();
+            this.InnerServices = config.StartInfos
+                .Select(s => ServiceFactory.Instance.Create(s))
+                .ToList();
         }
 
-        public void Run()
+        public void RunServices()
         {
-            this.Services.ForEach(s => s.Start());
+            this.InnerServices
+                .ForEach(s => s.Start());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ServiceOnset.Common;
+﻿using log4net;
+using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,8 +10,9 @@ namespace ServiceOnset.Services
 {
     public interface IService
     {
-        Process InternalProcess { get; }
+        Process InnerProcess { get; }
         IServiceStartInfo StartInfo { get; }
+        ILog Logger { get; }
 
         void Start();
     }

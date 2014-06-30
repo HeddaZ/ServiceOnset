@@ -1,4 +1,4 @@
-﻿using ServiceOnset.Common;
+﻿using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,22 +9,23 @@ namespace ServiceOnset.Services
 {
     public class DaemonService : ServiceBase
     {
-        public DaemonService(IServiceStartInfo startInfo) :
-            base(startInfo)
+        public DaemonService(IServiceStartInfo startInfo)
+            : base(startInfo)
         {
         }
 
         public override void Start()
         {
-            this.InternalProcess.StartInfo.FileName = this.StartInfo.Command;
-            this.InternalProcess.StartInfo.Arguments = this.StartInfo.Arguments;
-            this.InternalProcess.StartInfo.WorkingDirectory = this.StartInfo.InitialDirectory;
-            this.InternalProcess.StartInfo.UseShellExecute = false;
-            this.InternalProcess.StartInfo.ErrorDialog = false;
-            this.InternalProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            this.InternalProcess.StartInfo.RedirectStandardOutput = true;
+            this.InnerProcess.StartInfo.FileName = this.StartInfo.Command;
+            this.InnerProcess.StartInfo.Arguments = this.StartInfo.Arguments;
+            this.InnerProcess.StartInfo.WorkingDirectory = this.StartInfo.InitialDirectory;
 
-            this.InternalProcess.Start();
+            this.InnerProcess.StartInfo.UseShellExecute = false;
+            this.InnerProcess.StartInfo.ErrorDialog = false;
+            this.InnerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            this.InnerProcess.StartInfo.RedirectStandardOutput = true;
+
+            this.InnerProcess.Start();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ServiceOnset.Common;
+﻿using log4net;
+using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ namespace ServiceOnset.Services
 {
     public abstract class ServiceBase : IService
     {
-        public Process InternalProcess
+        public Process InnerProcess
         {
             get;
             private set;
@@ -19,11 +20,18 @@ namespace ServiceOnset.Services
             get;
             private set;
         }
+        public ILog Logger
+        {
+            get
+            {
+                return LogManager.GetLogger(this.StartInfo.Name);
+            }
+        }
 
         public ServiceBase(IServiceStartInfo startInfo)
         {
             this.StartInfo = startInfo;
-            this.InternalProcess = new Process();
+            this.InnerProcess = new Process();
         }
 
         public abstract void Start();
