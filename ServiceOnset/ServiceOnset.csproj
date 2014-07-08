@@ -47,10 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHelper.cs" />
-    <Compile Include="Common\IServiceOnsetConfig.cs" />
-    <Compile Include="Common\ServiceOnsetConfig.cs" />
-    <Compile Include="Common\ServiceOnsetConfigDataContract.cs" />
-    <Compile Include="Common\ServiceRunModel.cs" />
+    <Compile Include="Config\IServiceOnsetConfig.cs" />
+    <Compile Include="Config\ServiceOnsetConfig.cs" />
+    <Compile Include="Config\ServiceOnsetConfigDataContract.cs" />
+    <Compile Include="Config\ServiceRunModel.cs" />
     <Compile Include="ServiceHost.cs">
       <SubType>Component</SubType>
     </Compile>

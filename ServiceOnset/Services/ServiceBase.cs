@@ -1,5 +1,5 @@
 ﻿using log4net;
-using ServiceOnset.Common;
+using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

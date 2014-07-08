@@ -1,6 +1,7 @@
 ﻿{
 	"services": [
 		{
+			"name": "CMD",
 			"command": "cmd",
 			"arguments": "",
 			"initialDirectory": "",
@@ -9,6 +10,7 @@
 			"useShellExecute": true
 		},
 		{
+			"name": "NP",
 			"command": "notepad",
 			"arguments": "",
 			"initialDirectory": "",

@@ -4,18 +4,20 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace ServiceOnset.Common
+namespace ServiceOnset.Config
 {
     [DataContract]
     public partial class ServiceOnsetConfig
     {
         [DataMember(Name = "services")]
-        private ServiceStartInfo[] _starInfos;
+        private ServiceStartInfo[] _startInfos;
     }
 
     [DataContract]
     public partial class ServiceStartInfo
     {
+        [DataMember(Name = "name")]
+        private string _name;
         [DataMember(Name = "command")]
         private string _command;
         [DataMember(Name = "arguments")]

@@ -1,4 +1,4 @@
-﻿using ServiceOnset.Common;
+﻿using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,8 +10,8 @@ namespace ServiceOnset.Services
 {
     public class DaemonService : ServiceBase
     {
-        public DaemonService(IServiceStartInfo startInfo) :
-            base(startInfo)
+        public DaemonService(IServiceStartInfo startInfo)
+            : base(startInfo)
         {
         }
 
