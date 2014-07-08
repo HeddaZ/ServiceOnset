@@ -18,7 +18,8 @@ namespace ServiceOnset
 
         public void Run()
         {
-            this.Services.ForEach(s => s.Start());
+            //？？？？？？？？？？？？？？？？？？？？
+            this.Services.First().Start();
         }
     }
 }

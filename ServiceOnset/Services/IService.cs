@@ -9,8 +9,8 @@ namespace ServiceOnset.Services
 {
     public interface IService
     {
-        Process InternalProcess { get; }
         IServiceStartInfo StartInfo { get; }
+        Process InnerProcess { get; }
 
         void Start();
     }
