@@ -1,5 +1,6 @@
+<<<<<<< HEAD
 ﻿using log4net;
-using ServiceOnset.Config;
+using ServiceOnset.Common;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ using System.Threading;
 
 namespace ServiceOnset.Services
 {
-    public abstract class ServiceBase : IService
+    public abstract class ServiceBase : IService, IDisposable
     {
         #region IDisposable
 
@@ -66,8 +67,6 @@ namespace ServiceOnset.Services
                             this.InnerThread = null;
                         }
                     }
-                    this.InnerLogger = null;
-                    this.StartInfo = null;
 
                     #endregion
                 }
@@ -89,17 +88,17 @@ namespace ServiceOnset.Services
 
         #endregion
 
-        public IServiceStartInfo StartInfo
-        {
-            get;
-            private set;
-        }
-        protected ILog InnerLogger
+        protected ILog InnerLog
         {
             get;
             private set;
         }
 
+        public IServiceStartInfo StartInfo
+        {
+            get;
+            private set;
+        }
         public Process InnerProcess
         {
             get;
@@ -115,47 +114,63 @@ namespace ServiceOnset.Services
             get;
             set;
         }
+        
+
+        public ServiceBase(IServiceStartInfo startInfo)
+        {
+            this.InnerLog = LogManager.GetLogger(startInfo.);
+            this.StartInfo = startInfo;
+            this.InnerProcess = new Process();
+            this.InnerThread = new Thread(() => this.ThreadProc(this.InnerProcess, this.StartInfo));
+            this.InnerThread.IsBackground = true;
+            this.IsRunning = true;
+        }
+
+        public virtual void Start()
+        {
+            this.InnerThread.Start();
+        }
+        protected abstract void ThreadProc(Process process, IServiceStartInfo startInfo);
+    }
+}
+=======
+﻿using log4net;
+using ServiceOnset.Config;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+
+namespace ServiceOnset.Services
+{
+    public abstract class ServiceBase : IService
+    {
+        public Process InnerProcess
+        {
+            get;
+            private set;
+        }
+        public IServiceStartInfo StartInfo
+        {
+            get;
+            private set;
+        }
+        public ILog Logger
+        {
+            get
+            {
+                return LogManager.GetLogger(this.StartInfo.Name);
+            }
+        }
 
         public ServiceBase(IServiceStartInfo startInfo)
         {
             this.StartInfo = startInfo;
-            this.InnerLogger = LogManager.GetLogger(startInfo.Name);
-
             this.InnerProcess = new Process();
-            this.InnerProcess.StartInfo.UseShellExecute = false;
-            this.InnerProcess.StartInfo.ErrorDialog = false;
-            this.InnerProcess.StartInfo.CreateNoWindow = true;
-            this.InnerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            this.InnerProcess.ErrorDataReceived += InnerProcess_ErrorDataReceived;
-            this.InnerProcess.OutputDataReceived += InnerProcess_OutputDataReceived;
-            this.InnerProcess.StartInfo.RedirectStandardError = true;
-            this.InnerProcess.StartInfo.RedirectStandardOutput = this.StartInfo.LogOutput;
-
-            this.InnerThread = new Thread(new ThreadStart(this.ThreadProc));
-            this.InnerThread.IsBackground = true;
-
-            this.IsRunning = false;
         }
 
-        #region Process events
-
-        private void InnerProcess_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            this.InnerLogger.ErrorFormat("Process [{0}] error: {1}", this.StartInfo.Name, e.Data);
-        }
-        private void InnerProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            this.InnerLogger.InfoFormat("Process [{0}] output: {1}", this.StartInfo.Name, e.Data);
-        }
-
-        #endregion
-
-        public virtual void Start()
-        {
-            this.IsRunning = true;
-            this.InnerThread.Start();
-            this.InnerLogger.InfoFormat("Thread [{0}] started", this.StartInfo.Name);
-        }
-        protected abstract void ThreadProc();
+        public abstract void Start();
     }
 }
+>>>>>>> 59929cf1a92685bc61e6f8712935cf8f91c95baa

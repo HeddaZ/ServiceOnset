@@ -28,7 +28,7 @@ namespace ServiceOnset.Config
         private string _runMode;
         [DataMember(Name = "intervalInSeconds")]
         private int _intervalInSeconds;
-        [DataMember(Name = "useShellExecute")]
-        private bool _useShellExecute;
+        [DataMember(Name = "logOutput")]
+        private bool _logOutput;
     }
 }

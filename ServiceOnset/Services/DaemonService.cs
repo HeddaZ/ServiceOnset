@@ -15,22 +15,29 @@ namespace ServiceOnset.Services
         {
         }
 
-        protected override void ThreadProc(Process process, IServiceStartInfo startInfo)
+        protected override void ThreadProc()
         {
-            process.StartInfo.FileName = startInfo.Command;
-            process.StartInfo.Arguments = startInfo.Arguments;
-            process.StartInfo.WorkingDirectory = startInfo.InitialDirectory;
+            if (this.IsRunning)
+            {
+                this.InnerProcess.StartInfo.FileName = this.StartInfo.Command;
+                this.InnerProcess.StartInfo.Arguments = this.StartInfo.Arguments;
+                this.InnerProcess.StartInfo.WorkingDirectory = this.StartInfo.InitialDirectory;
 
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.ErrorDialog = false;
-            process.StartInfo.CreateNoWindow = true;
+                this.InnerProcess.Start();
+                this.InnerLogger.InfoFormat("Process [{0}] started", this.StartInfo.Name);
 
-            process.
+                if (this.InnerProcess.StartInfo.RedirectStandardOutput)
+                {
+                    this.InnerProcess.BeginOutputReadLine();
+                }
+                if (this.InnerProcess.StartInfo.RedirectStandardError)
+                {
+                    this.InnerProcess.BeginErrorReadLine();
+                }
 
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.StartInfo.RedirectStandardOutput = true;
-
-            process.Start();
+                this.InnerProcess.WaitForExit();
+                this.InnerLogger.InfoFormat("Process [{0}] exited", this.StartInfo.Name);
+            }
         }
     }
 }

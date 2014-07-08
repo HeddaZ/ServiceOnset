@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ServiceOnset.Services
 {
-    public interface IService
+    public interface IService : IDisposable
     {
         IServiceStartInfo StartInfo { get; }
         Process InnerProcess { get; }

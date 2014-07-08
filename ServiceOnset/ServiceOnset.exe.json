@@ -2,12 +2,12 @@
 	"services": [
 		{
 			"name": "CMD",
-			"command": "cmd",
-			"arguments": "",
-			"initialDirectory": "",
+			"command": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\mycmd.exe",
+			"arguments": "->hedda",
+			"initialDirectory": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\",
 			"runMode": "interval",
 			"intervalInSeconds": 10,
-			"useShellExecute": true
+			"logOutput": true
 		},
 		{
 			"name": "NP",

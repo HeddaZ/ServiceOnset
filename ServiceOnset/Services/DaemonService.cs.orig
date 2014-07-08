@@ -1,0 +1,70 @@
+<<<<<<< HEAD
+﻿using ServiceOnset.Common;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+namespace ServiceOnset.Services
+{
+    public class DaemonService : ServiceBase
+    {
+        public DaemonService(IServiceStartInfo startInfo) :
+            base(startInfo)
+        {
+        }
+
+        protected override void ThreadProc(Process process, IServiceStartInfo startInfo)
+        {
+            process.StartInfo.FileName = startInfo.Command;
+            process.StartInfo.Arguments = startInfo.Arguments;
+            process.StartInfo.WorkingDirectory = startInfo.InitialDirectory;
+
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.ErrorDialog = false;
+            process.StartInfo.CreateNoWindow = true;
+
+            process.
+
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            process.StartInfo.RedirectStandardOutput = true;
+
+            process.Start();
+        }
+    }
+}
+=======
+﻿using ServiceOnset.Config;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+
+namespace ServiceOnset.Services
+{
+    public class DaemonService : ServiceBase
+    {
+        public DaemonService(IServiceStartInfo startInfo)
+            : base(startInfo)
+        {
+        }
+
+        public override void Start()
+        {
+            this.InnerProcess.StartInfo.FileName = this.StartInfo.Command;
+            this.InnerProcess.StartInfo.Arguments = this.StartInfo.Arguments;
+            this.InnerProcess.StartInfo.WorkingDirectory = this.StartInfo.InitialDirectory;
+
+            this.InnerProcess.StartInfo.UseShellExecute = false;
+            this.InnerProcess.StartInfo.ErrorDialog = false;
+            this.InnerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            this.InnerProcess.StartInfo.RedirectStandardOutput = true;
+
+            this.InnerProcess.Start();
+        }
+    }
+}
+>>>>>>> 59929cf1a92685bc61e6f8712935cf8f91c95baa
