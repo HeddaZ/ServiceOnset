@@ -17,13 +17,19 @@ namespace ServiceOnset
         public static readonly string AppDirectory = Path.GetDirectoryName(AppPath);
         public static readonly string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        public static ILog AppLogger
+        #region 日志
+
+        public static void LogInfo(string loggerName, string format, params object[] args)
         {
-            get
-            {
-                return LogManager.GetLogger("AppLogger");
-            }
+            //AppHelper.Config
+            //LogManager.GetLogger(loggerName).Error()
         }
+        public static void LogInfo(string loggerName, string message)
+        {
+            //LogManager.GetLogger("").Error()
+        }
+
+        #endregion
 
         #region 配置
 

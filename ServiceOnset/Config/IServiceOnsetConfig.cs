@@ -7,6 +7,7 @@ namespace ServiceOnset.Config
 {
     public interface IServiceOnsetConfig
     {
+        bool EnableLog { get; }
         IServiceStartInfo[] StartInfos { get; }
     }
 
@@ -15,9 +16,9 @@ namespace ServiceOnset.Config
         string Name { get; }
         string Command { get; }
         string Arguments { get; }
-        string InitialDirectory { get; }
+        string WorkingDirectory { get; }
         ServiceRunMode RunMode { get; }
         int IntervalInSeconds { get; }
-        bool LogOutput { get; }
+        bool EnableLog { get; }
     }
 }

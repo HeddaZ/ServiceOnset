@@ -10,21 +10,94 @@ namespace ServiceOnset.Services
 {
     public class DaemonService : ServiceBase
     {
+        #region IDisposable
+
+        private bool disposed = false;
+        protected override void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    #region Dispose managed resources
+
+                    if (this.InnerProcess != null)
+                    {
+                        try
+                        {
+                            if (!this.InnerProcess.HasExited)
+                            {
+                                this.InnerProcess.Kill();
+                            }
+                            this.InnerProcess.Dispose();
+                        }
+                        catch
+                        {
+                        }
+                        finally
+                        {
+                            this.InnerProcess = null;
+                        }
+                    }
+
+                    #endregion
+                }
+
+                #region Clean up unmanaged resources
+
+                //
+
+                #endregion
+
+                this.disposed = true;
+            }
+
+            base.Dispose(disposing);
+        }
+
+        ~DaemonService()
+        {
+            this.Dispose(false);
+        }
+
+        #endregion
+
+        protected Process InnerProcess
+        {
+            get;
+            private set;
+        }
+
         public DaemonService(IServiceStartInfo startInfo)
             : base(startInfo)
         {
+            this.InnerProcess = new Process();
+            this.InnerProcess.StartInfo.ErrorDialog = false;
+            this.InnerProcess.StartInfo.CreateNoWindow = true;
+            this.InnerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            this.InnerProcess.StartInfo.UseShellExecute = false;
+            this.InnerProcess.StartInfo.RedirectStandardError = true;
+            this.InnerProcess.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
+            {
+                //
+            });
+            this.InnerProcess.StartInfo.RedirectStandardOutput = true;
+            this.InnerProcess.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
+            {
+                //
+            }); ;
+
+            this.InnerProcess.StartInfo.FileName = startInfo.Command;
+            this.InnerProcess.StartInfo.Arguments = startInfo.Arguments;
+            this.InnerProcess.StartInfo.WorkingDirectory = startInfo.WorkingDirectory;
         }
 
         protected override void ThreadProc()
         {
             if (this.IsRunning)
             {
-                this.InnerProcess.StartInfo.FileName = this.StartInfo.Command;
-                this.InnerProcess.StartInfo.Arguments = this.StartInfo.Arguments;
-                this.InnerProcess.StartInfo.WorkingDirectory = this.StartInfo.InitialDirectory;
-
                 this.InnerProcess.Start();
-                this.InnerLogger.InfoFormat("Process [{0}] started", this.StartInfo.Name);
 
                 if (this.InnerProcess.StartInfo.RedirectStandardOutput)
                 {
@@ -36,7 +109,6 @@ namespace ServiceOnset.Services
                 }
 
                 this.InnerProcess.WaitForExit();
-                this.InnerLogger.InfoFormat("Process [{0}] exited", this.StartInfo.Name);
             }
         }
     }

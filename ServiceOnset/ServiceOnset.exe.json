@@ -1,20 +1,20 @@
 ﻿{
+	"enableLog": true,
 	"services": [
 		{
 			"name": "CMD",
 			"command": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\mycmd.exe",
 			"arguments": "->hedda",
-			"initialDirectory": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\",
+			"workingDirectory": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\",
 			"runMode": "interval",
 			"intervalInSeconds": 10,
-			"logOutput": true
+			"enableLog": true,
 		},
 		{
 			"name": "NP",
 			"command": "notepad",
 			"arguments": "",
-			"initialDirectory": "",
-			"intervalInSeconds": -1
+			"workingDirectory": "",
 		},
 	]
 }

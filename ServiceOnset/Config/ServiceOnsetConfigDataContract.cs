@@ -9,6 +9,8 @@ namespace ServiceOnset.Config
     [DataContract]
     public partial class ServiceOnsetConfig
     {
+        [DataMember(Name = "enableLog")]
+        private bool _enableLog;
         [DataMember(Name = "services")]
         private ServiceStartInfo[] _startInfos;
     }
@@ -22,13 +24,13 @@ namespace ServiceOnset.Config
         private string _command;
         [DataMember(Name = "arguments")]
         private string _arguments;
-        [DataMember(Name = "initialDirectory")]
-        private string _initialDirectory;
+        [DataMember(Name = "workingDirectory")]
+        private string _workingDirectory;
         [DataMember(Name = "runMode")]
         private string _runMode;
         [DataMember(Name = "intervalInSeconds")]
         private int _intervalInSeconds;
-        [DataMember(Name = "logOutput")]
-        private bool _logOutput;
+        [DataMember(Name = "enableLog")]
+        private bool _enableLog;
     }
 }

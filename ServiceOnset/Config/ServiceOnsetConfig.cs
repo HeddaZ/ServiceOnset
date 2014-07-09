@@ -31,11 +31,17 @@ namespace ServiceOnset.Config
         }
 
         #endregion
-
         private ServiceOnsetConfig()
         {
         }
 
+        public bool EnableLog
+        {
+            get
+            {
+                return _enableLog;
+            }
+        }
         public IServiceStartInfo[] StartInfos
         {
             get
@@ -76,11 +82,11 @@ namespace ServiceOnset.Config
                 return _arguments;
             }
         }
-        public string InitialDirectory
+        public string WorkingDirectory
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(_initialDirectory) ? _initialDirectory : Path.GetDirectoryName(this.Command);
+                return !string.IsNullOrWhiteSpace(_workingDirectory) ? _workingDirectory : Path.GetDirectoryName(this.Command);
             }
         }
         public ServiceRunMode RunMode
@@ -97,11 +103,11 @@ namespace ServiceOnset.Config
                 return _intervalInSeconds > 0 ? _intervalInSeconds : 30;
             }
         }
-        public bool LogOutput
+        public bool EnableLog
         {
             get
             {
-                return _logOutput;
+                return _enableLog;
             }
         }
     }
