@@ -98,18 +98,25 @@ namespace ServiceOnset.Services
         {
             if (this.IsRunning)
             {
-                this.InnerProcess.Start();
-
-                if (this.InnerProcess.StartInfo.RedirectStandardOutput)
+                try
                 {
-                    this.InnerProcess.BeginOutputReadLine();
-                }
-                if (this.InnerProcess.StartInfo.RedirectStandardError)
-                {
-                    this.InnerProcess.BeginErrorReadLine();
-                }
+                    this.InnerProcess.Start();
 
-                this.InnerProcess.WaitForExit();
+                    if (this.InnerProcess.StartInfo.RedirectStandardOutput)
+                    {
+                        this.InnerProcess.BeginOutputReadLine();
+                    }
+                    if (this.InnerProcess.StartInfo.RedirectStandardError)
+                    {
+                        this.InnerProcess.BeginErrorReadLine();
+                    }
+
+                    this.InnerProcess.WaitForExit();
+                }
+                catch (Exception exception)
+                {
+                    this.Log.Error("ThreadProc error --->", exception);
+                }
             }
         }
     }

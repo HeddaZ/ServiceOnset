@@ -8,13 +8,13 @@
 			"workingDirectory": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\",
 			"runMode": "interval",
 			"intervalInSeconds": 10,
-			"enableLog": true,
+			"enableLog": true
 		},
 		{
 			"name": "NP",
 			"command": "notepad",
 			"arguments": "",
-			"workingDirectory": "",
+			"workingDirectory": ""
 		},
 	]
 }
