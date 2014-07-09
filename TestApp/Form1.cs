@@ -24,10 +24,7 @@ namespace TestApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text += "\r\n" + ServiceOnset.AppHelper.AppPath;
-            textBox1.Text += "\r\n" + ServiceOnset.AppHelper.AppVersion;
-
-
+            
         }
     }
 }

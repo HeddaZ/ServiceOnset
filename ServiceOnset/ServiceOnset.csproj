@@ -51,6 +51,7 @@
     <Compile Include="Config\ServiceOnsetConfig.cs" />
     <Compile Include="Config\ServiceOnsetConfigDataContract.cs" />
     <Compile Include="Config\ServiceRunModel.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="ServiceHost.cs">
       <SubType>Component</SubType>
     </Compile>

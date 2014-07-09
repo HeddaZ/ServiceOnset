@@ -49,6 +49,7 @@ namespace ServiceOnset.Services
                         }
                     }
                     this.StartInfo = null;
+                    this.Log = null;
 
                     #endregion
                 }
@@ -75,6 +76,11 @@ namespace ServiceOnset.Services
             get;
             private set;
         }
+        protected Logger Log
+        {
+            get;
+            private set;
+        }
         protected Thread InnerThread
         {
             get;
@@ -89,6 +95,7 @@ namespace ServiceOnset.Services
         public ServiceBase(IServiceStartInfo startInfo)
         {
             this.StartInfo = startInfo;
+            this.Log = new Logger(startInfo.Name, startInfo.EnableLog);
 
             this.InnerThread = new Thread(new ThreadStart(this.ThreadProc));
             this.InnerThread.IsBackground = true;
@@ -100,6 +107,12 @@ namespace ServiceOnset.Services
         {
             this.IsRunning = true;
             this.InnerThread.Start();
+            this.Log.Info("InnerThread is started");
+        }
+        public virtual void Stop()
+        {
+            this.IsRunning = false;
+            this.Log.Info("InnerThread is signalled to stop");
         }
         protected abstract void ThreadProc();
     }

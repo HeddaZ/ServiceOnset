@@ -8,7 +8,7 @@ namespace ServiceOnset.Services
 {
     public class ServiceFactory
     {
-        #region 单例
+        #region Singleton
 
         private static ServiceFactory _instance;
         private static object _mutex = new object();

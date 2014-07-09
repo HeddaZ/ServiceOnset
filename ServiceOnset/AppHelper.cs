@@ -1,5 +1,4 @@
-﻿using log4net;
-using ServiceOnset.Config;
+﻿using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,21 +16,31 @@ namespace ServiceOnset
         public static readonly string AppDirectory = Path.GetDirectoryName(AppPath);
         public static readonly string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        #region 日志
+        #region Log singleton
 
-        public static void LogInfo(string loggerName, string format, params object[] args)
+        private static Logger _log;
+        private static object _logMutex = new object();
+        public static Logger Log
         {
-            //AppHelper.Config
-            //LogManager.GetLogger(loggerName).Error()
-        }
-        public static void LogInfo(string loggerName, string message)
-        {
-            //LogManager.GetLogger("").Error()
+            get
+            {
+                if (_log == null)
+                {
+                    lock (_logMutex)
+                    {
+                        if (_log == null)
+                        {
+                            _log = new Logger();
+                        }
+                    }
+                }
+                return _log;
+            }
         }
 
         #endregion
 
-        #region 配置
+        #region Config singleton
 
         private static IServiceOnsetConfig _config;
         private static object _configMutex = new object();

@@ -75,17 +75,18 @@ namespace ServiceOnset.Services
             this.InnerProcess.StartInfo.ErrorDialog = false;
             this.InnerProcess.StartInfo.CreateNoWindow = true;
             this.InnerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            this.Log.Info("InnerProcess is created with hidden UI");
 
             this.InnerProcess.StartInfo.UseShellExecute = false;
             this.InnerProcess.StartInfo.RedirectStandardError = true;
             this.InnerProcess.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
             {
-                //
+                this.Log.Error("InnerProcess error: " + e.Data);
             });
             this.InnerProcess.StartInfo.RedirectStandardOutput = true;
             this.InnerProcess.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
             {
-                //
+                this.Log.Error("InnerProcess output: " + e.Data);
             }); ;
 
             this.InnerProcess.StartInfo.FileName = startInfo.Command;

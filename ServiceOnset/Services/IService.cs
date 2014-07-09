@@ -13,5 +13,6 @@ namespace ServiceOnset.Services
         IServiceStartInfo StartInfo { get; }
 
         void Start();
+        void Stop();
     }
 }

@@ -10,7 +10,7 @@ namespace ServiceOnset.Config
 {
     public partial class ServiceOnsetConfig : IServiceOnsetConfig
     {
-        #region 静态方法
+        #region Creator
 
         public static ServiceOnsetConfig Create(string configPath, Encoding encoding)
         {
@@ -31,6 +31,7 @@ namespace ServiceOnset.Config
         }
 
         #endregion
+
         private ServiceOnsetConfig()
         {
         }
