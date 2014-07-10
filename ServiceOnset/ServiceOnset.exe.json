@@ -3,10 +3,10 @@
 	"services": [
 		{
 			"name": "CMD",
-			"command": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\mycmd.exe",
+			"command": "mywin.exe",
 			"arguments": "->hedda",
-			"workingDirectory": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\",
-			"runMode": "interval",
+			"workingDirectory": "",
+			"runMode": "launch",
 			"intervalInSeconds": 10,
 			"useShellExecute": false,
 			"enableLog": true

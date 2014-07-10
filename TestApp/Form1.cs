@@ -13,18 +13,20 @@ namespace TestApp
 {
     public partial class Form1 : Form
     {
+        ServiceManager m;
+
         public Form1()
         {
             InitializeComponent();
 
 
-            ServiceManager m = new ServiceManager(AppHelper.Config);
+            m = new ServiceManager(AppHelper.Config);
             m.RunServices();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+            m.StopServices();
         }
     }
 }

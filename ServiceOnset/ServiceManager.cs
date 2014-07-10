@@ -23,5 +23,9 @@ namespace ServiceOnset
             //？？？？？？？？？？？？？？？？？？？？
             this.InnerServices.First().Start();
         }
+        public void StopServices()
+        {
+            this.InnerServices.ForEach(s => s.Stop());
+        }
     }
 }

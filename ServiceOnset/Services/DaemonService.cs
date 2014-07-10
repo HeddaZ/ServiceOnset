@@ -25,10 +25,6 @@ namespace ServiceOnset.Services
                     {
                         try
                         {
-                            if (!this.InnerProcess.HasExited)
-                            {
-                                this.InnerProcess.Kill();
-                            }
                             this.InnerProcess.Dispose();
                         }
                         catch

@@ -41,10 +41,10 @@ namespace ServiceOnset.Services
             {
                 case ServiceRunMode.Daemon:
                     return new DaemonService(startInfo) as IService;
-
-                case ServiceRunMode.ForceInterval:
-                case ServiceRunMode.Interval:
                 case ServiceRunMode.Launch:
+                    return new LaunchService(startInfo) as IService;
+                case ServiceRunMode.Interval:
+                case ServiceRunMode.ForceInterval:
                 default:
                     return new DaemonService(startInfo) as IService;
             }
