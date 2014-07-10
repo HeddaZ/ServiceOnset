@@ -112,6 +112,13 @@ namespace ServiceOnset.Config
                 return _intervalInSeconds > 0 ? _intervalInSeconds : 30;
             }
         }
+        public bool UseShellExecute
+        {
+            get
+            {
+                return _useShellExecute;
+            }
+        }
         public bool EnableLog
         {
             get

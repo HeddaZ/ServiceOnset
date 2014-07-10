@@ -72,26 +72,14 @@ namespace ServiceOnset.Services
             : base(startInfo)
         {
             this.InnerProcess = new Process();
-            this.InnerProcess.StartInfo.ErrorDialog = false;
-            this.InnerProcess.StartInfo.CreateNoWindow = true;
-            this.InnerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            this.Log.Info("InnerProcess is created with hidden UI");
-
-            this.InnerProcess.StartInfo.UseShellExecute = false;
-            this.InnerProcess.StartInfo.RedirectStandardError = true;
-            this.InnerProcess.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
-            {
-                this.Log.Error("InnerProcess error: " + e.Data);
-            });
-            this.InnerProcess.StartInfo.RedirectStandardOutput = true;
-            this.InnerProcess.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
-            {
-                this.Log.Error("InnerProcess output: " + e.Data);
-            }); ;
+            this.InnerProcess.StartInfo.UseShellExecute = startInfo.UseShellExecute;
 
             this.InnerProcess.StartInfo.FileName = startInfo.Command;
             this.InnerProcess.StartInfo.Arguments = startInfo.Arguments;
             this.InnerProcess.StartInfo.WorkingDirectory = startInfo.WorkingDirectory;
+            this.Log.Info("InnerProcess is created");
+
+            this.ResolveProcessBeforeStart(this.InnerProcess);
         }
 
         protected override void ThreadProc()
@@ -101,15 +89,7 @@ namespace ServiceOnset.Services
                 try
                 {
                     this.InnerProcess.Start();
-
-                    if (this.InnerProcess.StartInfo.RedirectStandardOutput)
-                    {
-                        this.InnerProcess.BeginOutputReadLine();
-                    }
-                    if (this.InnerProcess.StartInfo.RedirectStandardError)
-                    {
-                        this.InnerProcess.BeginErrorReadLine();
-                    }
+                    this.ResolveProcessAfterStart(this.InnerProcess);
 
                     this.InnerProcess.WaitForExit();
                 }

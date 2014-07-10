@@ -115,5 +115,43 @@ namespace ServiceOnset.Services
             this.Log.Info("InnerThread is signalled to stop");
         }
         protected abstract void ThreadProc();
+
+        #region Process helper
+
+        protected void ResolveProcessBeforeStart(Process process)
+        {
+            if (!process.StartInfo.UseShellExecute)
+            {
+                process.StartInfo.CreateNoWindow = true;
+
+                process.StartInfo.RedirectStandardError = true;
+                process.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
+                {
+                    this.Log.Error("InnerProcess error: " + e.Data);
+                });
+                process.StartInfo.RedirectStandardOutput = true;
+                process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
+                {
+                    this.Log.Error("InnerProcess output: " + e.Data);
+                });
+            }
+            else
+            {
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; // Ignorable
+            }
+        }
+        protected void ResolveProcessAfterStart(Process process)
+        {
+            if (process.StartInfo.RedirectStandardOutput)
+            {
+                process.BeginOutputReadLine();
+            }
+            if (process.StartInfo.RedirectStandardError)
+            {
+                process.BeginErrorReadLine();
+            }
+        } 
+
+        #endregion
     }
 }

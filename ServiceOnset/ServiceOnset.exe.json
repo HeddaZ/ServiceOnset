@@ -8,6 +8,7 @@
 			"workingDirectory": "D:\\Users\\Hedda\\Workspace\\dotNET\\mycmd\\mycmd\\bin\\Debug\\",
 			"runMode": "interval",
 			"intervalInSeconds": 10,
+			"useShellExecute": false,
 			"enableLog": true
 		},
 		{
