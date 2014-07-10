@@ -60,7 +60,7 @@ namespace ServiceOnset.Config
             {
                 if (string.IsNullOrWhiteSpace(_name))
                 {
-                    throw new Exception("Invalid name.");
+                    throw new ArgumentNullException("name");
                 }
                 return _name;
             }
@@ -71,7 +71,7 @@ namespace ServiceOnset.Config
             {
                 if (string.IsNullOrWhiteSpace(_command))
                 {
-                    throw new Exception("Invalid command.");
+                    throw new ArgumentNullException("command");
                 }
                 return _command;
             }
@@ -87,7 +87,15 @@ namespace ServiceOnset.Config
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(_workingDirectory) ? _workingDirectory : Path.GetDirectoryName(this.Command);
+                if (string.IsNullOrWhiteSpace(_workingDirectory))
+                {
+                    _workingDirectory = Path.GetDirectoryName(this.Command);
+                }
+                if (string.IsNullOrWhiteSpace(_workingDirectory))
+                {
+                    _workingDirectory = AppHelper.AppDirectory;
+                }
+                return _workingDirectory;
             }
         }
         public ServiceRunMode RunMode
