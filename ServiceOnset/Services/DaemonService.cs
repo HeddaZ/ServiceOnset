@@ -80,7 +80,7 @@ namespace ServiceOnset.Services
 
         protected override void ThreadProc()
         {
-            if (this.IsRunning)
+            while (this.IsRunning)
             {
                 try
                 {
@@ -92,8 +92,35 @@ namespace ServiceOnset.Services
                 catch (Exception exception)
                 {
                     this.Log.Error("ThreadProc error --->", exception);
+
+                    try
+                    {
+                        this.InnerProcess.Kill();
+                    }
+                    catch { }
                 }
+                finally
+                {
+                    this.ResolveProcessAfterExit(this.InnerProcess);
+                }
+
+                Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
             }
+        }
+
+        public override void Start()
+        {
+            base.Start();
+        }
+        public override void Stop()
+        {
+            base.Stop();
+
+            try
+            {
+                this.InnerProcess.Kill();
+            }
+            catch { }
         }
     }
 }

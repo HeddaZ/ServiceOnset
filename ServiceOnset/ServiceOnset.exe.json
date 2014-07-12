@@ -2,20 +2,23 @@
 	"enableLog": true,
 	"services": [
 		{
-			"name": "CMD",
-			"command": "mywin.exe",
-			"arguments": "->hedda",
+			"name": "NP",
+			"command": "notepad",
+			"arguments": "",
 			"workingDirectory": "",
-			"runMode": "launch",
-			"intervalInSeconds": 10,
+			"intervalInSeconds": 5,
 			"useShellExecute": true,
 			"enableLog": true
 		},
 		{
-			"name": "NP",
-			"command": "notepad",
-			"arguments": "",
-			"workingDirectory": ""
+			"name": "CMD",
+			"command": "mycmd.exe",
+			"arguments": "->hedda",
+			"workingDirectory": "",
+			"runMode": "launch",
+			"intervalInSeconds": 10,
+			"useShellExecute": false,
+			"enableLog": true
 		},
 	]
 }

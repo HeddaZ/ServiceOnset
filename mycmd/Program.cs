@@ -11,7 +11,7 @@ namespace mycmd
     {
         static void Main(string[] args)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 10; i++)
             {
                 string s = DateTime.Now.ToString();
                 using (StreamWriter w = new StreamWriter(Directory.GetCurrentDirectory() + "\\mycmd.txt", false))

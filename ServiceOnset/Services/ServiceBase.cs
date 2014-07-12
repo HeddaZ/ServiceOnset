@@ -142,14 +142,33 @@ namespace ServiceOnset.Services
         }
         protected void ResolveProcessAfterStart(Process process)
         {
-            if (process.StartInfo.RedirectStandardOutput)
+            try
             {
-                process.BeginOutputReadLine();
+                if (process.StartInfo.RedirectStandardOutput)
+                {
+                    process.BeginOutputReadLine();
+                }
+                if (process.StartInfo.RedirectStandardError)
+                {
+                    process.BeginErrorReadLine();
+                }
             }
-            if (process.StartInfo.RedirectStandardError)
+            catch { }
+        }
+        protected void ResolveProcessAfterExit(Process process)
+        {
+            try
             {
-                process.BeginErrorReadLine();
+                if (process.StartInfo.RedirectStandardError)
+                {
+                    process.CancelErrorRead();
+                }
+                if (process.StartInfo.RedirectStandardOutput)
+                {
+                    process.CancelOutputRead();
+                }
             }
+            catch { }
         } 
 
         #endregion
