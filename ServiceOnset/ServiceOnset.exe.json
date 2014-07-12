@@ -3,11 +3,11 @@
 	"services": [
 		{
 			"name": "CMD",
-			"command": "mycmd.exe",
+			"command": "mywin.exe",
 			"arguments": "->hedda",
 			"workingDirectory": "",
 			"runMode": "interval",
-			"intervalInSeconds": 2,
+			"intervalInSeconds": 4,
 			"useShellExecute": false,
 			"enableLog": true
 		},

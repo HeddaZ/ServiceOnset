@@ -20,8 +20,7 @@ namespace ServiceOnset
 
         public void RunServices()
         {
-            //？？？？？？？？？？？？？？？？？？？？
-            this.InnerServices.First().Start();
+            this.InnerServices.ForEach(s => s.Start());
         }
         public void StopServices()
         {

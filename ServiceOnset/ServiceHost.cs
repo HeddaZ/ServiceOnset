@@ -11,19 +11,23 @@ namespace ServiceOnset
 {
     public partial class ServiceHost : ServiceBase
     {
+        private ServiceManager ServiceManager { get; set; }
+
         public ServiceHost()
         {
             InitializeComponent();
+
+            this.ServiceManager = new ServiceManager(AppHelper.Config);
         }
 
         protected override void OnStart(string[] args)
         {
-            ServiceManager m = new ServiceManager(AppHelper.Config);
-            m.RunServices();
+            this.ServiceManager.RunServices();
         }
 
         protected override void OnStop()
         {
+            this.ServiceManager.StopServices();
         }
     }
 }
