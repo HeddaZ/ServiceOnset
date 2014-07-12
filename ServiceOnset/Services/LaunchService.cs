@@ -86,22 +86,34 @@ namespace ServiceOnset.Services
                     this.InnerProcess.Start();
                     this.ResolveProcessAfterStart(this.InnerProcess);
 
-                    //this.InnerProcess.WaitForExit();
+                    this.InnerProcess.WaitForExit();
                 }
                 catch (Exception exception)
                 {
                     this.Log.Error("ThreadProc error --->", exception);
+
+                    try
+                    {
+                        this.InnerProcess.Kill();
+                    }
+                    catch { }
                 }
             }
         }
 
+        public override void Start()
+        {
+            base.Start();
+        }
         public override void Stop()
         {
-            //if (!this.InnerProcess.HasExited)
-            //{
-                this.InnerProcess.Kill();
-            //}
             base.Stop();
+
+            try
+            {
+                this.InnerProcess.Kill();
+            }
+            catch { }
         }
     }
 }

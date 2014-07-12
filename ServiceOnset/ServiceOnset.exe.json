@@ -8,7 +8,7 @@
 			"workingDirectory": "",
 			"runMode": "launch",
 			"intervalInSeconds": 10,
-			"useShellExecute": false,
+			"useShellExecute": true,
 			"enableLog": true
 		},
 		{
