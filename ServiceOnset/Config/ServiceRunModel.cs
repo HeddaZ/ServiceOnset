@@ -9,7 +9,6 @@ namespace ServiceOnset.Config
     {
         Daemon,
         Launch,
-        Interval,
-        ForceInterval
+        Interval
     }
 }
