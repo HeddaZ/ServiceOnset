@@ -88,6 +88,22 @@ Uninstallation
 |intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode|
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`|
 
+Case sample for [COW]
+---------------------
+1. Make sure `cow.exe` or `cow-hide.exe` or `cow-taskbar.exe` with `rc.txt` can work.
+2. Extract ServiceOnset binary package to COW directory. And config like this:
+```json
+{
+	"enableLog": true,
+	"services": [
+		{
+			"name": "COW",
+			"command": "cow.exe"
+		}
+	]
+}
+```
+
 -------------------------------
 **Contact QQ: 9812152 `@Hedda`**
 
