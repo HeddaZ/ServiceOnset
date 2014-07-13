@@ -31,7 +31,7 @@
             // 
             // ServiceHost
             // 
-            this.ServiceName = "ServiceOnset";
+            this.ServiceName = AppHelper.AppTitle;
 
         }
 

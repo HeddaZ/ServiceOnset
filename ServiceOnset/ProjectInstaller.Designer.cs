@@ -39,8 +39,8 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.Description = "Run command line program as a windows service. Is it cool?";
-            this.serviceInstaller1.ServiceName = "ServiceOnset";
+            this.serviceInstaller1.Description = AppHelper.AppDescription;
+            this.serviceInstaller1.ServiceName = AppHelper.AppTitle;
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

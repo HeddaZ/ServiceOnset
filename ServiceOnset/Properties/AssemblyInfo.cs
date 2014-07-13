@@ -1,12 +1,13 @@
-﻿using System.Reflection;
+﻿using ServiceOnset;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ServiceOnset")]
-[assembly: AssemblyDescription("Run command line program as a windows service. Is it cool?")]
+[assembly: AssemblyTitle(AppHelper.AppTitle)]
+[assembly: AssemblyDescription(AppHelper.AppDescription)]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("+ii")]
 [assembly: AssemblyProduct("ServiceOnset")]

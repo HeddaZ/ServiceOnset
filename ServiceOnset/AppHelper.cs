@@ -12,6 +12,9 @@ namespace ServiceOnset
 {
     public class AppHelper
     {
+        public const string AppTitle = "ServiceOnset";
+        public const string AppDescription = "Run command line program as a windows service. Is it cool? --- Contact QQ: 9812152";
+
         public static readonly string AppPath = Assembly.GetExecutingAssembly().Location;
         public static readonly string AppDirectory = Path.GetDirectoryName(AppPath);
         public static readonly string AppVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();

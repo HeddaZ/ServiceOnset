@@ -16,6 +16,9 @@ namespace ServiceOnset
             this.InnerServices = config.StartInfos
                 .Select(s => ServiceFactory.Instance.Create(s))
                 .ToList();
+            AppHelper.Log.Info("{0} service(s) initialized: {1}",
+                this.InnerServices.Count,
+                string.Join(", ", this.InnerServices.Select(s => s.StartInfo.Name + "(" + s.StartInfo.RunMode.ToString() + ")").ToArray()));
         }
 
         public void RunServices()

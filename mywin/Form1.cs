@@ -20,10 +20,10 @@ namespace mywin
         private void timer1_Tick(object sender, EventArgs e)
         {
             string s = DateTime.Now.ToString();
-            using (StreamWriter w = new StreamWriter(Directory.GetCurrentDirectory() + "\\mywin.txt", false))
-            {
-                w.WriteLine(s);
-            }
+            //using (StreamWriter w = new StreamWriter(Directory.GetCurrentDirectory() + "\\mywin.txt", false))
+            //{
+            //    w.WriteLine(s);
+            //}
             label1.Text = s;
         }
     }
