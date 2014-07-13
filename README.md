@@ -7,22 +7,23 @@ ServiceOnset is a wrapper program implemented as a windows service. So it enable
 
 Prerequisites
 -------------
-Windows operation
-[Microsoft .NET Framework 4.0]
+Windows operation with [Microsoft .NET Framework 4.0]
 
 Installation
 ------------
 1. Clone and build the solution with `VisualStudio` or download the binary package directly.
-	> InstallUtil.exe
-	> log4net.config
-	> log4net.dll
-	> ServiceOnset.exe
-	> ServiceOnset.exe.json
+```
+InstallUtil.exe
+log4net.config
+log4net.dll
+ServiceOnset.exe
+ServiceOnset.exe.json
+```
 2. Start a command line with Administrator privilege.
 3. Navigate to the directory of the binary package.
 4. Run `InstallUtil ServiceOnset.exe` to install the service.
 5. Change the config of ServiceOnset as you want. Refer to [ServiceOnset.exe.json](#config)
-6. `Optional` Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
+6. `Optional.` Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
 ```xml
 <log4net>
   <root>
@@ -52,7 +53,7 @@ Uninstallation
 
 <a name="config">ServiceOnset.exe.json</a>
 ------------------------------------------
-Below is a config sample:
+#### Sample
 ```json
 {
 	"enableLog": true,
@@ -74,7 +75,7 @@ Below is a config sample:
 	]
 }
 ```
-
+#### References
 |Property			|Value type	|Required	|Default	|Description|
 |--------			|------		|-------	|-------	|-----------|
 |enableLog			|bool		|			|false		|Determinate if generate logs by `log4net`|
@@ -82,9 +83,9 @@ Below is a config sample:
 |name				|string		|Yes		|			|Program identifier, must be same to the corresponding logger name|
 |command			|string		|Yes		|			|Command (with full path or not). eg.: `ping`|
 |arguments			|string		|			|""			|Command arguments. eg.: `www.baidu.com`|
-|workingDirectory	|string		|			|Command path, ServiceOnset path			|Working directory. eg.: `D:\\ServiceOnset\\`|
+|workingDirectory	|string		|			|Command path, or ServiceOnset path			|Working directory. eg.: `D:\\ServiceOnset\\`|
 |runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited<br/>`"launch"`: Launch the program once and let it be<br/>`"interval"`: Restart the program termly by force kill the running process|
-|intervalInSeconds	|int		|			|30			|Detecting interval for current run mode|
+|intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode|
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`|
 
 -------------------------------
