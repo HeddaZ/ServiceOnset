@@ -132,7 +132,7 @@ namespace ServiceOnset.Services
                 process.StartInfo.RedirectStandardOutput = true;
                 process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
                 {
-                    this.Log.Error("InnerProcess output: " + e.Data);
+                    this.Log.Info("InnerProcess output: " + e.Data);
                 });
             }
             else

@@ -80,7 +80,7 @@ namespace ServiceOnset.Config
         {
             get
             {
-                return _arguments;
+                return _arguments != null ? _arguments : string.Empty;
             }
         }
         public string WorkingDirectory
