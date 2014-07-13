@@ -32,7 +32,7 @@ ServiceOnset.exe.json
   <appender name="Default" type="log4net.Appender.RollingFileAppender">
     <file value="logs/log" />
     <appendToFile value="true" />
-    <rollingStyle valu e="Date" />
+    <rollingStyle value="Date" />
     <datePattern value="yyyyMMdd&quot;.log&quot;" />
     <layout type="log4net.Layout.PatternLayout">
       <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
