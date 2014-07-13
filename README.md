@@ -89,7 +89,7 @@ Uninstallation
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`|
 
 -------------------------------
-**Contact QQ: 9812152 `@Hedda`**
+**Contact QQ: 9812152 `Hedda`**
 
 [Node.js]: http://nodejs.org/
 [COW]: https://github.com/cyfdecyf/cow
