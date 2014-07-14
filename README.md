@@ -11,19 +11,19 @@ Windows operation with [Microsoft .NET Framework 4.0]
 
 Installation
 ------------
-1. Clone and build the solution with `VisualStudio` or download the binary package directly.
-```
-InstallUtil.exe
-log4net.config
-log4net.dll
-ServiceOnset.exe
-ServiceOnset.exe.json
-```
-2. Start a command line with Administrator privilege.
-3. Navigate to the directory of the binary package.
-4. Run `InstallUtil ServiceOnset.exe` to install the service.
-5. Change the config of ServiceOnset as you want. Refer to [ServiceOnset.exe.json](#config)
-6. `Optional.` Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
+* Clone and build the solution with `VisualStudio` or download the binary package directly.
+>InstallUtil.exe  
+log4net.config  
+log4net.dll  
+ServiceOnset.exe  
+ServiceOnset.exe.json  
+
+* Start a command line with Administrator privilege.
+* Navigate to the directory of the binary package.
+* Run `InstallUtil ServiceOnset.exe` to install the service.
+* Change the config of ServiceOnset as you want. Refer to [ServiceOnset.exe.json](#config)
+* `Optional.` Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
+
 ```xml
 <log4net>
   <root>
@@ -40,8 +40,8 @@ ServiceOnset.exe.json
   </appender>
 </log4net>
 ```
-7. Open windows services manager and start **ServiceOnset** service. Or directly execute `net start ServiceOnset`.
-8. Enjoy ~~
+* Open windows services manager and start **ServiceOnset** service. Or directly execute `net start ServiceOnset`.
+* Enjoy ~~
 
 Uninstallation
 --------------
