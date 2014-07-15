@@ -47,6 +47,10 @@ namespace ServiceOnset.Config
         {
             get
             {
+                if (_startInfos == null)
+                {
+                    throw new ArgumentNullException("services");
+                }
                 return _startInfos.OfType<IServiceStartInfo>().ToArray();
             }
         }
@@ -54,6 +58,8 @@ namespace ServiceOnset.Config
 
     public partial class ServiceStartInfo : IServiceStartInfo
     {
+        private ServiceRunMode? _runMode;
+
         public string Name
         {
             get
@@ -80,7 +86,11 @@ namespace ServiceOnset.Config
         {
             get
             {
-                return _arguments != null ? _arguments : string.Empty;
+                if (_arguments == null)
+                {
+                    _arguments = string.Empty;
+                }
+                return _arguments;
             }
         }
         public string WorkingDirectory
@@ -102,14 +112,30 @@ namespace ServiceOnset.Config
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(_runMode) ? (ServiceRunMode)Enum.Parse(typeof(ServiceRunMode), _runMode, true) : ServiceRunMode.Daemon;
+                if (!_runMode.HasValue)
+                {
+                    ServiceRunMode value;
+                    if (Enum.TryParse<ServiceRunMode>(_runModeText, true, out value))
+                    {
+                        _runMode = value;
+                    }
+                    else
+                    {
+                        _runMode = ServiceRunMode.Daemon;
+                    }
+                }
+                return _runMode.Value;
             }
         }
         public int IntervalInSeconds
         {
             get
             {
-                return _intervalInSeconds > 0 ? _intervalInSeconds : 30;
+                if (_intervalInSeconds <= 0)
+                {
+                    _intervalInSeconds = 30;
+                }
+                return _intervalInSeconds;
             }
         }
         public bool UseShellExecute

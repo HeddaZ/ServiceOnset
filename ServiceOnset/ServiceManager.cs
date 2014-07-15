@@ -9,25 +9,31 @@ namespace ServiceOnset
 {
     public class ServiceManager
     {
-        private List<IService> InnerServices { get; set; }
+        public List<IService> Services
+        {
+            get;
+            private set;
+        }
 
         public ServiceManager(IServiceOnsetConfig config)
         {
-            this.InnerServices = config.StartInfos
+            this.Services = config.StartInfos
                 .Select(s => ServiceFactory.Instance.Create(s))
                 .ToList();
             AppHelper.Log.Info("{0} service(s) initialized: {1}",
-                this.InnerServices.Count,
-                string.Join(", ", this.InnerServices.Select(s => s.StartInfo.Name + "(" + s.StartInfo.RunMode.ToString() + ")").ToArray()));
+                this.Services.Count,
+                string.Join(", ", this.Services.Select(s => s.StartInfo.Name + "(" + s.StartInfo.RunMode.ToString() + ")").ToArray()));
         }
 
         public void RunServices()
         {
-            this.InnerServices.ForEach(s => s.Start());
+            this.Services.ForEach(s => s.Start());
+            AppHelper.Log.Info(AppHelper.AppTitle + " started");
         }
         public void StopServices()
         {
-            this.InnerServices.ForEach(s => s.Stop());
+            this.Services.ForEach(s => s.Stop());
+            AppHelper.Log.Info(AppHelper.AppTitle + " stopped");
         }
     }
 }

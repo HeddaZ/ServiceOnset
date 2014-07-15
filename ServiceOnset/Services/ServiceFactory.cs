@@ -39,14 +39,15 @@ namespace ServiceOnset.Services
         {
             switch (startInfo.RunMode)
             {
+                case ServiceRunMode.Daemon:
+                    return new DaemonService(startInfo) as IService;
                 case ServiceRunMode.Launch:
                     return new LaunchService(startInfo) as IService;
                 case ServiceRunMode.Interval:
                     return new IntervalService(startInfo) as IService;
 
-                case ServiceRunMode.Daemon:
                 default:
-                    return new DaemonService(startInfo) as IService;
+                    throw new ArgumentOutOfRangeException("runMode");
             }
         }
     }

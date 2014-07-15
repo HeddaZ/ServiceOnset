@@ -27,7 +27,7 @@ namespace ServiceOnset.Config
         [DataMember(Name = "workingDirectory")]
         private string _workingDirectory;
         [DataMember(Name = "runMode")]
-        private string _runMode;
+        private string _runModeText;
         [DataMember(Name = "intervalInSeconds")]
         private int _intervalInSeconds;
         [DataMember(Name = "useShellExecute")]
