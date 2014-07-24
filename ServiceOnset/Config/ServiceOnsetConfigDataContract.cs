@@ -32,6 +32,8 @@ namespace ServiceOnset.Config
         private int _intervalInSeconds;
         [DataMember(Name = "useShellExecute")]
         private bool _useShellExecute;
+        [DataMember(Name = "allowWindow")]
+        private bool _allowWindow;
         [DataMember(Name = "enableLog")]
         private bool _enableLog;
     }

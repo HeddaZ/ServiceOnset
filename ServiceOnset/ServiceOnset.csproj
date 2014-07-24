@@ -136,9 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="038.ico" />
-    <Content Include="InstallUtil.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

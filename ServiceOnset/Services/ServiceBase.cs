@@ -122,7 +122,10 @@ namespace ServiceOnset.Services
         {
             if (!process.StartInfo.UseShellExecute)
             {
-                process.StartInfo.CreateNoWindow = true;
+                if (!this.StartInfo.AllowWindow)
+                {
+                    process.StartInfo.CreateNoWindow = true;
+                }
 
                 process.StartInfo.RedirectStandardError = true;
                 process.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
@@ -137,7 +140,10 @@ namespace ServiceOnset.Services
             }
             else
             {
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; // Ignorable
+                if (!this.StartInfo.AllowWindow)
+                {
+                    process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; // Ignorable
+                }
             }
         }
         protected void ResolveProcessAfterStart(Process process)

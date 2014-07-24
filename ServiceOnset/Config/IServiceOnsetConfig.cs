@@ -20,6 +20,7 @@ namespace ServiceOnset.Config
         ServiceRunMode RunMode { get; }
         int IntervalInSeconds { get; }
         bool UseShellExecute { get; }
+        bool AllowWindow { get; }
         bool EnableLog { get; }
     }
 }

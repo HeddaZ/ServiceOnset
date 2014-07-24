@@ -145,6 +145,13 @@ namespace ServiceOnset.Config
                 return _useShellExecute;
             }
         }
+        public bool AllowWindow
+        {
+            get
+            {
+                return _allowWindow;
+            }
+        }
         public bool EnableLog
         {
             get

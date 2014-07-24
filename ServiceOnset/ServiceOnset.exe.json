@@ -9,6 +9,7 @@
 			"runMode": "interval",
 			"intervalInSeconds": 10,
 			"useShellExecute": false,
+			"allowWindow": false,
 			"enableLog": true
 		},
 		{
