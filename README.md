@@ -21,8 +21,12 @@ Installation
 * Start a command line with Administrator privilege.
 * Navigate to the directory of the binary package.
 * Run `C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe ServiceOnset.exe` to install the service.
+* `Optional`. If you got an error like below (#3), please `right-click` ServiceOnset.exe file and click `Unblock` button in the program's property window.
+> Exception occurred while initializing the installation:  
+> System.IO.FileLoadException: Could not load file or assembly '...\ServiceOnset.exe' or one of its dependencies. Operation is not supported. (Exception from HRESULT: 0x80131515).
+
 * Change the config of ServiceOnset as you want. Refer to [ServiceOnset.exe.json](#config)
-* `Optional.` Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
+* `Optional`. Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
 
 ```xml
 <log4net>
