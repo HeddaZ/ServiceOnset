@@ -57,7 +57,16 @@ namespace ServiceOnset
                     {
                         if (_config == null)
                         {
-                            _config = ServiceOnsetConfig.Create(AppHelper.AppPath + ".json"); // ServiceOnset.exe.json
+                            string configPath = AppHelper.AppPath + ".json"; // ServiceOnset.exe.json
+                            try
+                            {
+                                _config = ServiceOnsetConfig.Create(configPath);
+                            }
+                            catch (Exception exception)
+                            {
+                                AppHelper.Log.Error("Load config \"" + configPath + "\" failed --->", exception);
+                                throw;
+                            }
                         }
                     }
                 }
