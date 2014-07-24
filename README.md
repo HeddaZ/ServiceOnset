@@ -20,7 +20,7 @@ Installation
 * Start a command line with Administrator privilege.
 * Navigate to the directory of the binary package.
 * Run `C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe ServiceOnset.exe` to install the service.
-* `Optional.` If you got an error like below (#3), please `right-click` ServiceOnset.exe file and click `Unblock` button in the program's property window.
+* `Optional.` If you got an error like below ([Issue #3]), please `right-click` ServiceOnset.exe file and click `Unblock` button in the program's property window.
 > Exception occurred while initializing the installation:  
 > System.IO.FileLoadException: Could not load file or assembly '...\ServiceOnset.exe' or one of its dependencies. Operation is not supported. (Exception from HRESULT: 0x80131515).
 
@@ -117,3 +117,4 @@ Case sample for [COW]
 [Microsoft .NET Framework 4.0]: http://www.microsoft.com/zh-cn/download/details.aspx?id=17718
 [log4net Config]: http://logging.apache.org/log4net/release/config-examples.html
 [UseShellExecute]: http://msdn.microsoft.com/en-us/library/system.diagnostics.processstartinfo.useshellexecute.aspx
+[Issue #3]: https://github.com/HeddaZ/ServiceOnset/issues/3
