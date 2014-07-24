@@ -1,5 +1,5 @@
-ServiceOnset - A simple service wrapper
-=======================================
+ServiceOnset - A light and FREE service wrapper
+===============================================
 
 ServiceOnset is an utility to help you to run one or more programs as a **windows service**. Is it cool?
 The most typical usage is for [Node.js], [COW], regular jobs and so on.
@@ -12,15 +12,15 @@ Windows operation with [Microsoft .NET Framework 4.0]
 Installation
 ------------
 * Clone and build the solution with `VisualStudio` or download the binary package directly.
->InstallUtil.exe  
-log4net.config  
-log4net.dll  
-ServiceOnset.exe  
-ServiceOnset.exe.json  
+> InstallUtil.exe  
+> log4net.config  
+> log4net.dll  
+> ServiceOnset.exe  
+> ServiceOnset.exe.json  
 
 * Start a command line with Administrator privilege.
 * Navigate to the directory of the binary package.
-* Run `InstallUtil ServiceOnset.exe` to install the service.
+* Run `C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe ServiceOnset.exe` to install the service.
 * Change the config of ServiceOnset as you want. Refer to [ServiceOnset.exe.json](#config)
 * `Optional.` Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
 
@@ -48,7 +48,7 @@ Uninstallation
 1. Stop the service `net stop ServiceOnset` if it is running.
 2. Start a command line with Administrator privilege.
 3. Navigate to the directory of the binary package.
-4. Run `InstallUtil /u ServiceOnset.exe` to remove the service.
+4. Run `C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /u ServiceOnset.exe` to remove the service.
 5. Clean up the directory.
 
 <a name="config">ServiceOnset.exe.json</a>
@@ -66,6 +66,7 @@ Uninstallation
 			"runMode": "interval",
 			"intervalInSeconds": 10,
 			"useShellExecute": false,
+			"allowWindow": false,
 			"enableLog": true
 		},
 		{
@@ -87,6 +88,7 @@ Uninstallation
 |runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited<br/>`"launch"`: Launch the program once and let it be<br/>`"interval"`: Restart the program termly by force kill the running process|
 |intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode|
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`|
+|allowWindow		|bool		|			|false		|If `true`, will not restrict the wrapped program showing an UI; otherwise, will try to do that by setting "CreateNoWindow=true" or "WindowStyle=Hidden"|
 
 Case sample for [COW]
 ---------------------
