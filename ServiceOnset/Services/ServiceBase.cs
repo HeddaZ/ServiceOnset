@@ -3,6 +3,7 @@ using ServiceOnset.Config;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -99,8 +100,14 @@ namespace ServiceOnset.Services
 
             this.InnerThread = new Thread(new ThreadStart(this.ThreadProc));
             this.InnerThread.IsBackground = true;
-
             this.IsRunning = false;
+
+            if (startInfo.KillExistingProcess)
+            {
+                Process.GetProcesses().Where(p => this.TryMatchProcess(p, startInfo.Command))
+                    .ToList()
+                    .ForEach(p => this.TryKillProcess(p));
+            }
         }
 
         public virtual void Start()
@@ -175,7 +182,53 @@ namespace ServiceOnset.Services
                 }
             }
             catch { }
-        } 
+        }
+
+        private bool TryMatchProcess(Process process, string command)
+        {
+            try
+            {
+                return process.MainModule != null
+                    && process.MainModule.FileName != null
+                    && (Path.GetFileName(process.MainModule.FileName).Equals(Path.GetFileName(command), StringComparison.OrdinalIgnoreCase)
+                        || Path.GetFileNameWithoutExtension(process.MainModule.FileName).Equals(Path.GetFileNameWithoutExtension(command), StringComparison.OrdinalIgnoreCase));
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private void TryKillProcess(Process process)
+        {
+            const string tskillCommand = "tskill";
+            const string tskillArguments = "{0}";
+            const string ntsdCommand = "ntsd";
+            const string ntsdArguments = "-c q -p {0}";
+            try
+            {
+                using (Process killer = new Process())
+                {
+                    if (System.Environment.OSVersion.Version.Major >= 6)
+                    {
+                        killer.StartInfo.FileName = tskillCommand;
+                        killer.StartInfo.Arguments = string.Format(tskillArguments, process.Id);
+                    }
+                    else
+                    {
+                        killer.StartInfo.FileName = ntsdCommand;
+                        killer.StartInfo.Arguments = string.Format(ntsdArguments, process.Id);
+                    }
+                    killer.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    killer.Start();
+                    killer.WaitForExit();
+                    killer.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                this.Log.Error("TryKillProcess error but resumed --->", exception);
+            }
+        }
 
         #endregion
     }

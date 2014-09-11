@@ -10,11 +10,13 @@
 			"intervalInSeconds": 10,
 			"useShellExecute": false,
 			"allowWindow": false,
+			"killExistingProcess": false,
 			"enableLog": true
 		},
 		{
 			"name": "mywinTesting",
-			"command": "mywin"
+			"command": "mywin",
+			"killExistingProcess": true
 		}
 	]
 }

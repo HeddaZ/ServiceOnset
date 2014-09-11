@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHelper.cs" />
-    <Compile Include="Config\IServiceOnsetConfig.cs" />
     <Compile Include="Config\ServiceOnsetConfig.cs" />
     <Compile Include="Config\ServiceOnsetConfigDataContract.cs" />
     <Compile Include="Config\ServiceRunModel.cs" />

@@ -70,6 +70,7 @@ Uninstallation
 			"intervalInSeconds": 10,
 			"useShellExecute": false,
 			"allowWindow": false,
+			"killExistingProcess": false,
 			"enableLog": true
 		},
 		{
@@ -92,6 +93,7 @@ Uninstallation
 |intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode|
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`|
 |allowWindow		|bool		|			|false		|If `true`, will not restrict the wrapped program showing an UI; otherwise, will try to do that by setting "CreateNoWindow=true" or "WindowStyle=Hidden"|
+|killExistingProcess|bool		|			|false		|If `true`, will try to kill the existing process whose file name equals [Command] when initializing the service entry. Here any error will be ignored except logging|
 
 Case sample for [COW]
 ---------------------

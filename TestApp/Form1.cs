@@ -19,7 +19,10 @@ namespace TestApp
         {
             InitializeComponent();
 
-
+            //Process[] ps = Process.GetProcesses();
+            //var p1 = ps.Select(p => p.MainModule.ModuleName);
+            //var p2 = p1.Where(p => p != null);
+            var v = System.Environment.OSVersion.Version;
             m = new ServiceManager(AppHelper.Config);
             m.RunServices();
         }

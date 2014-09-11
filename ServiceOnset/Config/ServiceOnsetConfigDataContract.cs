@@ -34,6 +34,8 @@ namespace ServiceOnset.Config
         private bool _useShellExecute;
         [DataMember(Name = "allowWindow")]
         private bool _allowWindow;
+        [DataMember(Name = "killExistingProcess")]
+        private bool _killExistingProcess;
         [DataMember(Name = "enableLog")]
         private bool _enableLog;
     }

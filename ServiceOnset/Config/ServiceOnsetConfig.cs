@@ -8,6 +8,11 @@ using System.Xml;
 
 namespace ServiceOnset.Config
 {
+    public interface IServiceOnsetConfig
+    {
+        bool EnableLog { get; }
+        IServiceStartInfo[] StartInfos { get; }
+    }
     public partial class ServiceOnsetConfig : IServiceOnsetConfig
     {
         #region Creator
@@ -56,6 +61,19 @@ namespace ServiceOnset.Config
         }
     }
 
+    public interface IServiceStartInfo
+    {
+        string Name { get; }
+        string Command { get; }
+        string Arguments { get; }
+        string WorkingDirectory { get; }
+        ServiceRunMode RunMode { get; }
+        int IntervalInSeconds { get; }
+        bool UseShellExecute { get; }
+        bool AllowWindow { get; }
+        bool KillExistingProcess { get; }
+        bool EnableLog { get; }
+    }
     public partial class ServiceStartInfo : IServiceStartInfo
     {
         private ServiceRunMode? _runMode;
@@ -86,11 +104,7 @@ namespace ServiceOnset.Config
         {
             get
             {
-                if (_arguments == null)
-                {
-                    _arguments = string.Empty;
-                }
-                return _arguments;
+                return _arguments ?? string.Empty;
             }
         }
         public string WorkingDirectory
@@ -150,6 +164,13 @@ namespace ServiceOnset.Config
             get
             {
                 return _allowWindow;
+            }
+        }
+        public bool KillExistingProcess
+        {
+            get
+            {
+                return _killExistingProcess;
             }
         }
         public bool EnableLog
