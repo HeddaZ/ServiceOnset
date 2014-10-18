@@ -11,7 +11,7 @@ Windows operation with [Microsoft .NET Framework 4.0]
 
 Installation
 ------------
-* Clone and build the solution with `VisualStudio`, or [DOWNLOAD] (recommended) the binary package directly.
+* Clone and build the solution with `VisualStudio`, or **[DOWNLOAD]** the binary package directly.
 > log4net.config  
 > log4net.dll  
 > ServiceOnset.exe  
