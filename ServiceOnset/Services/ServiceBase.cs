@@ -152,6 +152,15 @@ namespace ServiceOnset.Services
                     process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; // Ignorable
                 }
             }
+
+            if (string.IsNullOrEmpty(Path.GetExtension(process.StartInfo.FileName)))
+            {
+                process.StartInfo.FileName = process.StartInfo.FileName.TrimEnd('.') + ".exe";
+            }
+            if (!File.Exists(process.StartInfo.FileName) && Directory.Exists(process.StartInfo.WorkingDirectory))
+            {
+                process.StartInfo.FileName = Path.Combine(process.StartInfo.WorkingDirectory, Path.GetFileName(process.StartInfo.FileName));
+            }
         }
         protected void ResolveProcessAfterStart(Process process)
         {
