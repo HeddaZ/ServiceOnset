@@ -11,7 +11,7 @@ Windows operation with [Microsoft .NET Framework 4.0]
 
 Installation
 ------------
-* Clone and build the solution with `VisualStudio` or download the binary package directly.
+* Clone and build the solution with `VisualStudio`, or [DOWNLOAD] (recommended) the binary package directly.
 > log4net.config  
 > log4net.dll  
 > ServiceOnset.exe  
@@ -117,6 +117,7 @@ Case sample for [COW]
 [Node.js]: http://nodejs.org/
 [COW]: https://github.com/cyfdecyf/cow
 [Microsoft .NET Framework 4.0]: http://www.microsoft.com/zh-cn/download/details.aspx?id=17718
+[DOWNLOAD]: https://github.com/HeddaZ/ServiceOnset/releases
 [log4net Config]: http://logging.apache.org/log4net/release/config-examples.html
 [UseShellExecute]: http://msdn.microsoft.com/en-us/library/system.diagnostics.processstartinfo.useshellexecute.aspx
 [Issue #3]: https://github.com/HeddaZ/ServiceOnset/issues/3
