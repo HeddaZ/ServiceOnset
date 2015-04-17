@@ -73,9 +73,16 @@ Uninstallation
 			"killExistingProcess": false,
 			"enableLog": true
 		},
-		{
-			"name": "mywinTesting",
-			"command": "mywin"
+        {
+            "name": "mywin_AppPath",
+            "command": "mywin",
+            "killExistingProcess": true
+        },
+        {
+			"name": "mywin_RelativePath",
+            "command": "test\\mywin.exe",
+            "runMode": "interval",
+			"killExistingProcess": true
 		}
 	]
 }
@@ -86,7 +93,7 @@ Uninstallation
 |enableLog			|bool		|			|false		|Determinate if generate logs by `log4net`|
 |services			|array		|Yes		|(empty)	|Program definitions hosted by `ServiceOnset`|
 |name				|string		|Yes		|			|Program identifier, must be same to the corresponding logger name|
-|command			|string		|Yes		|			|Command (with full path or not). eg.: `ping`|
+|command			|string		|Yes		|			|Command (with full path, relative path ([Issue #5]) or Windows ENV path). eg.: `ping`|
 |arguments			|string		|			|""			|Command arguments. eg.: `www.baidu.com`|
 |workingDirectory	|string		|			|Command path, or ServiceOnset path			|Working directory. eg.: `D:\\ServiceOnset\\`|
 |runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited<br/>`"launch"`: Launch the program once and let it be<br/>`"interval"`: Restart the program termly by force kill the running process|
@@ -121,3 +128,4 @@ Case sample for [COW]
 [log4net Config]: http://logging.apache.org/log4net/release/config-examples.html
 [UseShellExecute]: http://msdn.microsoft.com/en-us/library/system.diagnostics.processstartinfo.useshellexecute.aspx
 [Issue #3]: https://github.com/HeddaZ/ServiceOnset/issues/3
+[Issue #5]: https://github.com/HeddaZ/ServiceOnset/issues/5

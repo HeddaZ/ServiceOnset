@@ -41,22 +41,36 @@ namespace ServiceOnset.Config
         {
         }
 
+        private bool? _enableLog;
         public bool EnableLog
         {
             get
             {
-                return _enableLog;
+                if (!_enableLog.HasValue)
+                {
+                    _enableLog = _originalEnableLog;
+                }
+                return _enableLog.Value;
             }
         }
+
+        private IServiceStartInfo[] _startInfos;
         public IServiceStartInfo[] StartInfos
         {
             get
             {
                 if (_startInfos == null)
                 {
-                    throw new ArgumentNullException("services");
+                    if (_originalStartInfos == null)
+                    {
+                        throw new ArgumentNullException("services");
+                    }
+                    else
+                    {
+                        _startInfos = _originalStartInfos.OfType<IServiceStartInfo>().ToArray();
+                    }
                 }
-                return _startInfos.OfType<IServiceStartInfo>().ToArray();
+                return _startInfos;
             }
         }
     }
@@ -76,52 +90,107 @@ namespace ServiceOnset.Config
     }
     public partial class ServiceStartInfo : IServiceStartInfo
     {
-        private ServiceRunMode? _runMode;
-
+        private string _name;
         public string Name
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_name))
+                if (_name == null)
                 {
-                    throw new ArgumentNullException("name");
+                    if (string.IsNullOrWhiteSpace(_originalName))
+                    {
+                        throw new ArgumentNullException("name");
+                    }
+                    else
+                    {
+                        _name = _originalName;
+                    }
                 }
                 return _name;
             }
         }
+
+        private string _command;
         public string Command
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_command))
+                if (_command == null)
                 {
-                    throw new ArgumentNullException("command");
+                    if (string.IsNullOrWhiteSpace(_originalCommand))
+                    {
+                        throw new ArgumentNullException("command");
+                    }
+                    else if (!Path.IsPathRooted(_originalCommand))
+                    {
+                        #region 程序路径、工作目录或系统路径
+
+                        string possibleCommand = Path.Combine(AppHelper.AppDirectory, _originalCommand);
+                        if (CommandExists(possibleCommand))
+                        {
+                            _command = possibleCommand;
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrWhiteSpace(_originalWorkingDirectory))
+                            {
+                                possibleCommand = Path.Combine(_originalWorkingDirectory, _originalCommand);
+                                if (CommandExists(possibleCommand))
+                                {
+                                    _originalCommand = possibleCommand;
+                                }
+                                else
+                                {
+                                    //系统路径无需处理，自动应用 Path 环境变量
+                                    _command = _originalCommand;
+                                }
+                            }
+                            else
+                            {
+                                _command = _originalCommand;
+                            }
+                        }
+
+                        #endregion
+                    }
+                    else
+                    {
+                        _command = _originalCommand;
+                    }
                 }
                 return _command;
             }
         }
+
+        private string _arguments;
         public string Arguments
         {
             get
             {
-                return _arguments ?? string.Empty;
+                if (_arguments == null)
+                {
+                    _arguments = _originalArguments ?? string.Empty;
+                }
+                return _arguments;
             }
         }
+
+        private string _workingDirectory;
         public string WorkingDirectory
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_workingDirectory))
+                if (_workingDirectory == null)
                 {
-                    _workingDirectory = Path.GetDirectoryName(this.Command);
-                }
-                if (string.IsNullOrWhiteSpace(_workingDirectory))
-                {
-                    _workingDirectory = AppHelper.AppDirectory;
+                    _workingDirectory = string.IsNullOrWhiteSpace(_originalWorkingDirectory)
+                        ? Path.GetDirectoryName(this.Command)
+                        : _originalWorkingDirectory;
                 }
                 return _workingDirectory;
             }
         }
+
+        private ServiceRunMode? _runMode;
         public ServiceRunMode RunMode
         {
             get
@@ -129,7 +198,7 @@ namespace ServiceOnset.Config
                 if (!_runMode.HasValue)
                 {
                     ServiceRunMode value;
-                    if (Enum.TryParse<ServiceRunMode>(_runModeText, true, out value))
+                    if (Enum.TryParse<ServiceRunMode>(_originalRunMode, true, out value))
                     {
                         _runMode = value;
                     }
@@ -141,43 +210,90 @@ namespace ServiceOnset.Config
                 return _runMode.Value;
             }
         }
+
+        private int? _intervalInSeconds;
         public int IntervalInSeconds
         {
             get
             {
-                if (_intervalInSeconds <= 0)
+                if (!_intervalInSeconds.HasValue)
                 {
-                    _intervalInSeconds = 30;
+                    _intervalInSeconds = _originalIntervalInSeconds <= 0
+                        ? 30
+                        : _originalIntervalInSeconds;
                 }
-                return _intervalInSeconds;
+                return _intervalInSeconds.Value;
             }
         }
+
+        private bool? _useShellExecute;
         public bool UseShellExecute
         {
             get
             {
-                return _useShellExecute;
+                if (!_useShellExecute.HasValue)
+                {
+                    _useShellExecute = _originalUseShellExecute;
+                }
+                return _useShellExecute.Value;
             }
         }
+
+        private bool? _allowWindow;
         public bool AllowWindow
         {
             get
             {
-                return _allowWindow;
+                if (!_allowWindow.HasValue)
+                {
+                    _allowWindow = _originalAllowWindow;
+                }
+                return _allowWindow.Value;
             }
         }
+
+        private bool? _killExistingProcess;
         public bool KillExistingProcess
         {
             get
             {
-                return _killExistingProcess;
+                if (!_killExistingProcess.HasValue)
+                {
+                    _killExistingProcess = _originalKillExistingProcess;
+                }
+                return _killExistingProcess.Value;
             }
         }
+
+        private bool? _enableLog;
         public bool EnableLog
         {
             get
             {
-                return _enableLog;
+                if (!_enableLog.HasValue)
+                {
+                    _enableLog = _originalEnableLog;
+                }
+                return _enableLog.Value;
+            }
+        }
+
+        private bool CommandExists(string command)
+        {
+            if (File.Exists(command))
+            {
+                return true;
+            }
+
+            string directory = Path.GetDirectoryName(command);
+            if (Directory.Exists(directory))
+            {
+                string fileName = Path.GetFileNameWithoutExtension(command);
+                return Directory.GetFiles(directory, fileName + ".*", SearchOption.TopDirectoryOnly).Length > 0;
+            }
+            else
+            {
+                return false;
             }
         }
     }

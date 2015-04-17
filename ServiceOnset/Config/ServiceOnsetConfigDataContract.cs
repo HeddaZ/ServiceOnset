@@ -10,33 +10,33 @@ namespace ServiceOnset.Config
     public partial class ServiceOnsetConfig
     {
         [DataMember(Name = "enableLog")]
-        private bool _enableLog;
+        private bool _originalEnableLog;
         [DataMember(Name = "services")]
-        private ServiceStartInfo[] _startInfos;
+        private ServiceStartInfo[] _originalStartInfos;
     }
 
     [DataContract]
     public partial class ServiceStartInfo
     {
         [DataMember(Name = "name")]
-        private string _name;
+        private string _originalName;
         [DataMember(Name = "command")]
-        private string _command;
+        private string _originalCommand;
         [DataMember(Name = "arguments")]
-        private string _arguments;
+        private string _originalArguments;
         [DataMember(Name = "workingDirectory")]
-        private string _workingDirectory;
+        private string _originalWorkingDirectory;
         [DataMember(Name = "runMode")]
-        private string _runModeText;
+        private string _originalRunMode;
         [DataMember(Name = "intervalInSeconds")]
-        private int _intervalInSeconds;
+        private int _originalIntervalInSeconds;
         [DataMember(Name = "useShellExecute")]
-        private bool _useShellExecute;
+        private bool _originalUseShellExecute;
         [DataMember(Name = "allowWindow")]
-        private bool _allowWindow;
+        private bool _originalAllowWindow;
         [DataMember(Name = "killExistingProcess")]
-        private bool _killExistingProcess;
+        private bool _originalKillExistingProcess;
         [DataMember(Name = "enableLog")]
-        private bool _enableLog;
+        private bool _originalEnableLog;
     }
 }

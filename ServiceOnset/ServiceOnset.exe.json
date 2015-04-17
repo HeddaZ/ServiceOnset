@@ -13,9 +13,15 @@
 			"killExistingProcess": false,
 			"enableLog": true
 		},
-		{
-			"name": "mywinTesting",
-			"command": "mywin",
+        {
+            "name": "mywin_AppPath",
+            "command": "mywin",
+            "killExistingProcess": true
+        },
+        {
+			"name": "mywin_RelativePath",
+            "command": "test\\mywin.exe",
+            "runMode": "interval",
 			"killExistingProcess": true
 		}
 	]
