@@ -1,7 +1,7 @@
 ServiceOnset - A light and FREE service wrapper
 ===============================================
 
-ServiceOnset is an utility to help you to run one or more programs as a **windows service**. Is it cool?
+ServiceOnset is an exciting utility to help you to run **one or more programs** as **single windows service**. Is it cool?
 The most typical usage is for [Node.js], [COW], regular jobs and so on.
 ServiceOnset is a wrapper program implemented as a windows service. So it enables some of foreground applications started before login.
 
