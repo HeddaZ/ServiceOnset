@@ -86,8 +86,6 @@ namespace ServiceOnset.Services
                 {
                     this.InnerProcess.Start();
                     this.ResolveProcessAfterStart(this.InnerProcess);
-
-                    Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
                 }
                 catch (Exception exception)
                 {
@@ -101,9 +99,9 @@ namespace ServiceOnset.Services
                         this.InnerProcess.Kill();
                     }
                     catch { }
-                }
 
-                Thread.Sleep(10);
+                    Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
+                }
             }
         }
 
