@@ -99,9 +99,9 @@ namespace ServiceOnset.Services
                         this.InnerProcess.Kill();
                     }
                     catch { }
-
-                    Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
                 }
+
+                Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
             }
         }
 
