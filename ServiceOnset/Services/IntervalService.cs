@@ -86,22 +86,25 @@ namespace ServiceOnset.Services
                 {
                     this.InnerProcess.Start();
                     this.ResolveProcessAfterStart(this.InnerProcess);
+
+                    Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
                 }
                 catch (Exception exception)
                 {
                     this.Log.Error("ThreadProc error --->", exception);
+
+                    Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
                 }
                 finally
                 {
                     this.ResolveProcessAfterExit(this.InnerProcess);
+
                     try
                     {
                         this.InnerProcess.Kill();
                     }
                     catch { }
                 }
-
-                Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
             }
         }
 

@@ -42,6 +42,7 @@
             this.serviceInstaller1.Description = AppHelper.AppDescription;
             this.serviceInstaller1.ServiceName = AppHelper.AppTitle;
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller1.Committed += new System.Configuration.Install.InstallEventHandler(this.serviceInstaller1_Committed);
             // 
             // ProjectInstaller
             // 
