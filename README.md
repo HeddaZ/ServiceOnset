@@ -44,8 +44,8 @@ Installation
 </log4net>
 ```
 * Open windows services manager and start **ServiceOnset** service. Or directly execute `net start ServiceOnset`.
-* Known [Issue #7]. ServiceOnset currently CANNOT support an UI-based program because of the *session 0 isolation* problem on Win2008 or above. Only added `Interop.cs` as a preparation.
-* Enjoy ~~
+* Known [Issue #7]. ServiceOnset currently CANNOT support an UI-based program because of the **session 0 isolation** problem on Win2008 or above. Only added `Interop.cs` as a preparation.
+* Enjoy ~
 
 Uninstallation
 --------------
