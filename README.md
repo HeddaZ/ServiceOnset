@@ -4,6 +4,7 @@ ServiceOnset - A light and FREE service wrapper
 ServiceOnset is an exciting utility to help you to run **one or more programs** as **single windows service**. Is it cool?
 The most typical usage is for [Node.js], [COW], regular jobs and so on.
 ServiceOnset is a wrapper program implemented as a windows service. So it enables some of foreground applications started before login.
+Known [Issue #7]. ServiceOnset currently CANNOT support an UI-based program because of the **session 0 isolation** problem on Win2008 or above. Only added `Interop.cs` as a preparation for further enhancement.
 
 Prerequisites
 -------------
@@ -44,7 +45,6 @@ Installation
 </log4net>
 ```
 * Open windows services manager and start **ServiceOnset** service. Or directly execute `net start ServiceOnset`.
-* Known [Issue #7]. ServiceOnset currently CANNOT support an UI-based program because of the **session 0 isolation** problem on Win2008 or above. Only added `Interop.cs` as a preparation.
 * Enjoy ~
 
 Uninstallation
