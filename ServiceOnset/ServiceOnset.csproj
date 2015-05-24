@@ -87,6 +87,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceManager.cs" />
     <Compile Include="Services\DaemonService.cs" />
+    <Compile Include="Services\Interop.cs" />
     <Compile Include="Services\IntervalService.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\LaunchService.cs" />

@@ -98,6 +98,10 @@ namespace ServiceOnset.Services
                     }
                     catch { }
                 }
+                finally
+                {
+                    this.ResolveProcessAfterExit(this.InnerProcess);
+                }
             }
         }
 

@@ -84,7 +84,6 @@ namespace ServiceOnset.Config
         ServiceRunMode RunMode { get; }
         int IntervalInSeconds { get; }
         bool UseShellExecute { get; }
-        bool AllowWindow { get; }
         bool KillExistingProcess { get; }
         bool EnableLog { get; }
     }
@@ -236,19 +235,6 @@ namespace ServiceOnset.Config
                     _useShellExecute = _originalUseShellExecute;
                 }
                 return _useShellExecute.Value;
-            }
-        }
-
-        private bool? _allowWindow;
-        public bool AllowWindow
-        {
-            get
-            {
-                if (!_allowWindow.HasValue)
-                {
-                    _allowWindow = _originalAllowWindow;
-                }
-                return _allowWindow.Value;
             }
         }
 

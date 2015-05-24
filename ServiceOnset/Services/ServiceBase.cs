@@ -129,11 +129,6 @@ namespace ServiceOnset.Services
         {
             if (!process.StartInfo.UseShellExecute)
             {
-                if (!this.StartInfo.AllowWindow)
-                {
-                    process.StartInfo.CreateNoWindow = true;
-                }
-
                 process.StartInfo.RedirectStandardError = true;
                 process.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
                 {
@@ -144,13 +139,6 @@ namespace ServiceOnset.Services
                 {
                     this.Log.Info("InnerProcess output: " + e.Data);
                 });
-            }
-            else
-            {
-                if (!this.StartInfo.AllowWindow)
-                {
-                    process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; // Ignorable
-                }
             }
 
             if (string.IsNullOrEmpty(Path.GetExtension(process.StartInfo.FileName)))
