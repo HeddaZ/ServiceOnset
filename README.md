@@ -44,6 +44,7 @@ Installation
 </log4net>
 ```
 * Open windows services manager and start **ServiceOnset** service. Or directly execute `net start ServiceOnset`.
+* Known [Issue #7]. ServiceOnset currently CANNOT support an UI-based program because of the *session 0 isolation* problem on Win2008 or above. Only added `Interop.cs` as a preparation.
 * Enjoy ~~
 
 Uninstallation
@@ -69,7 +70,6 @@ Uninstallation
 			"runMode": "interval",
 			"intervalInSeconds": 10,
 			"useShellExecute": false,
-			"allowWindow": false,
 			"killExistingProcess": false,
 			"enableLog": true
 		},
@@ -99,7 +99,6 @@ Uninstallation
 |runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited<br/>`"launch"`: Launch the program once and let it be<br/>`"interval"`: Restart the program termly by force kill the running process|
 |intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode|
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`|
-|allowWindow		|bool		|			|false		|If `true`, will not restrict the wrapped program showing an UI; otherwise, will try to do that by setting "CreateNoWindow=true" or "WindowStyle=Hidden"|
 |killExistingProcess|bool		|			|false		|If `true`, will try to kill the existing process whose file name equals [Command] when initializing the service entry. Here any error will be ignored except logging|
 
 Case sample for [COW]
@@ -129,3 +128,4 @@ Case sample for [COW]
 [UseShellExecute]: http://msdn.microsoft.com/en-us/library/system.diagnostics.processstartinfo.useshellexecute.aspx
 [Issue #3]: https://github.com/HeddaZ/ServiceOnset/issues/3
 [Issue #5]: https://github.com/HeddaZ/ServiceOnset/issues/5
+[Issue #7]: https://github.com/HeddaZ/ServiceOnset/issues/7
