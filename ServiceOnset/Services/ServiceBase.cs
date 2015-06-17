@@ -203,8 +203,8 @@ namespace ServiceOnset.Services
             }
             catch
             {
-                const string tskillCommand = "tskill";
-                const string tskillArguments = "{0}";
+                const string taskkillCommand = "TASKKILL";
+                const string taskkillArguments = "/PID {0}";
                 const string ntsdCommand = "ntsd";
                 const string ntsdArguments = "-c q -p {0}";
                 try
@@ -213,8 +213,8 @@ namespace ServiceOnset.Services
                     {
                         if (System.Environment.OSVersion.Version.Major >= 6)
                         {
-                            killer.StartInfo.FileName = tskillCommand;
-                            killer.StartInfo.Arguments = string.Format(tskillArguments, process.Id);
+                            killer.StartInfo.FileName = taskkillCommand;
+                            killer.StartInfo.Arguments = string.Format(taskkillArguments, process.Id);
                         }
                         else
                         {
