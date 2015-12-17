@@ -120,9 +120,13 @@ namespace ServiceOnset.Config
                     {
                         throw new ArgumentNullException("command");
                     }
-                    else if (!Path.IsPathRooted(_originalCommand))
+                    else if (Path.IsPathRooted(_originalCommand))
                     {
-                        #region 程序路径、工作目录或系统路径
+                        _command = _originalCommand;
+                    }
+                    else
+                    {
+                        #region 非完整路径，尝试匹配程序路径、工作目录、系统路径
 
                         string possibleCommand = Path.Combine(AppHelper.AppDirectory, _originalCommand);
                         if (CommandExists(possibleCommand))
@@ -131,30 +135,22 @@ namespace ServiceOnset.Config
                         }
                         else
                         {
-                            if (!string.IsNullOrWhiteSpace(_originalWorkingDirectory))
-                            {
-                                possibleCommand = Path.Combine(_originalWorkingDirectory, _originalCommand);
-                                if (CommandExists(possibleCommand))
-                                {
-                                    _originalCommand = possibleCommand;
-                                }
-                                else
-                                {
-                                    //系统路径无需处理，自动应用 Path 环境变量
-                                    _command = _originalCommand;
-                                }
-                            }
-                            else
+                            if (string.IsNullOrWhiteSpace(_originalWorkingDirectory))
                             {
                                 _command = _originalCommand;
                             }
+                            else
+                            {
+                                possibleCommand = Path.IsPathRooted(_originalWorkingDirectory)
+                                    ? Path.Combine(_originalWorkingDirectory, _originalCommand)
+                                    : Path.Combine(AppHelper.AppDirectory, _originalWorkingDirectory, _originalCommand);
+                                _command = CommandExists(possibleCommand)
+                                    ? possibleCommand
+                                    : _originalCommand;
+                            }
                         }
 
-                        #endregion
-                    }
-                    else
-                    {
-                        _command = _originalCommand;
+                        #endregion                        
                     }
                 }
                 return _command;
@@ -183,7 +179,9 @@ namespace ServiceOnset.Config
                 {
                     _workingDirectory = string.IsNullOrWhiteSpace(_originalWorkingDirectory)
                         ? Path.GetDirectoryName(this.Command)
-                        : _originalWorkingDirectory;
+                        : (Path.IsPathRooted(_originalWorkingDirectory)
+                            ? _originalWorkingDirectory
+                            : Path.Combine(AppHelper.AppDirectory, _originalWorkingDirectory));
                 }
                 return _workingDirectory;
             }
