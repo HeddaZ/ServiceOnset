@@ -46,8 +46,8 @@ Installation
 ```
 
 * `Optional.` If you are trying to launch a desktop-related program, you may need to create these 2 folders.
-> C:\Windows\SysWOW64\config\systemprofile\Desktop
-> C:\Windows\System32\config\systemprofile\Desktop
+> C:\Windows\SysWOW64\config\systemprofile\Desktop  
+> C:\Windows\System32\config\systemprofile\Desktop  
 
 * Open windows services manager and start **ServiceOnset** service. Or directly execute `net start ServiceOnset`.
 * Enjoy ~
