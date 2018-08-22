@@ -65,6 +65,7 @@ Uninstallation
 #### Sample
 ```json
 {
+  "enableLog": true,
   "services": [
     {
       "name": "Ping-Baidu",
@@ -102,13 +103,13 @@ Case sample for [COW]
 2. Extract ServiceOnset binary package to COW directory. And config like this:
 ```json
 {
-	"enableLog": true,
-	"services": [
-		{
-			"name": "COW",
-			"command": "cow.exe"
-		}
-	]
+  "enableLog": true,
+  "services": [
+    {
+      "name": "COW-Proxy",
+      "command": "cow.exe"
+    }
+  ]
 }
 ```
 
