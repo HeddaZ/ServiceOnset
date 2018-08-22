@@ -16,7 +16,6 @@ namespace ServiceOnset
         public ServiceHost()
         {
             InitializeComponent();
-
             this.ServiceManager = new ServiceManager(AppHelper.Config);
         }
 

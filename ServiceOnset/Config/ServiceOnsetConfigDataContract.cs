@@ -9,6 +9,8 @@ namespace ServiceOnset.Config
     [DataContract]
     public partial class ServiceOnsetConfig
     {
+        [DataMember(Name = "enableLog")]
+        private bool _originalEnableLog;
         [DataMember(Name = "services")]
         private ServiceStartInfo[] _originalStartInfos;
     }

@@ -101,13 +101,6 @@ namespace ServiceOnset.Services
             this.InnerThread = new Thread(new ThreadStart(this.ThreadProc));
             this.InnerThread.IsBackground = true;
             this.IsRunning = false;
-
-            if (startInfo.KillExistingProcess)
-            {
-                Process.GetProcesses().Where(p => TryMatchProcess(p, startInfo.Command))
-                    .ToList()
-                    .ForEach(p => TryKillProcess(p));
-            }
         }
 
         public virtual void Start()
@@ -125,25 +118,47 @@ namespace ServiceOnset.Services
 
         #region Process helper
 
-        protected void ResolveProcessBeforeStart(Process process)
+        protected Process CreateProcess()
         {
-            if (!process.StartInfo.UseShellExecute)
+            if (StartInfo.KillExistingProcess)
+            {
+                Log.Info("Try to kill existing process");
+                Process.GetProcesses().Where(p => TryMatchProcess(p, StartInfo.Command))
+                    .ToList()
+                    .ForEach(p => TryKillProcess(p));
+            }
+
+            var process = new Process();
+            process.StartInfo.UseShellExecute = StartInfo.UseShellExecute;
+            process.StartInfo.FileName = StartInfo.Command;
+            process.StartInfo.Arguments = StartInfo.Arguments;
+            process.StartInfo.WorkingDirectory = StartInfo.WorkingDirectory;
+            Log.Info("InnerProcess is created");
+
+            if (!StartInfo.UseShellExecute)
             {
                 process.StartInfo.RedirectStandardError = true;
                 process.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
                 {
-                    this.Log.Error("InnerProcess error: " + e.Data);
+                    Log.Error("InnerProcess error: " + e.Data);
                 });
                 process.StartInfo.RedirectStandardOutput = true;
                 process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
                 {
-                    this.Log.Info("InnerProcess output: " + e.Data);
+                    Log.Info("InnerProcess output: " + e.Data);
                 });
 
+                if (StartInfo.HideWindow)
+                {
+                    process.StartInfo.CreateNoWindow = true;
+                }
             }
             else
             {
-
+                if (StartInfo.HideWindow)
+                {
+                    process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                }
             }
 
             if (string.IsNullOrEmpty(Path.GetExtension(process.StartInfo.FileName)))
@@ -154,6 +169,8 @@ namespace ServiceOnset.Services
             {
                 process.StartInfo.FileName = Path.Combine(process.StartInfo.WorkingDirectory, Path.GetFileName(process.StartInfo.FileName));
             }
+
+            return process;
         }
 
         protected static void EnableOutputRedirection(Process process)

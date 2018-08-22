@@ -10,6 +10,7 @@ namespace ServiceOnset.Config
 {
     public interface IServiceOnsetConfig
     {
+        bool EnableLog { get; }
         IServiceStartInfo[] StartInfos { get; }
     }
     public partial class ServiceOnsetConfig : IServiceOnsetConfig
@@ -38,6 +39,19 @@ namespace ServiceOnset.Config
 
         private ServiceOnsetConfig()
         {
+        }
+
+        private bool? _enableLog;
+        public bool EnableLog
+        {
+            get
+            {
+                if (!_enableLog.HasValue)
+                {
+                    _enableLog = _originalEnableLog;
+                }
+                return _enableLog.Value;
+            }
         }
 
         private IServiceStartInfo[] _startInfos;

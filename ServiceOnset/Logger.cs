@@ -24,14 +24,10 @@ namespace ServiceOnset
         internal Logger(string name, bool enabled)
         {
             this.InnerLogger = LogManager.GetLogger(name);
-            this.Enabled = enabled;
+            this.Enabled = enabled && AppHelper.Config.EnableLog;
         }
-        internal Logger(string name)
-            : this(name, true)
-        {
-        }
-        internal Logger()
-            : this(DefaultLoggerName)
+        internal Logger(bool enabled)
+            : this(DefaultLoggerName, enabled)
         {
         }
 

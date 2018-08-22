@@ -33,7 +33,7 @@ namespace ServiceOnset
                     {
                         if (_log == null)
                         {
-                            _log = new Logger();
+                            _log = new Logger(Config.EnableLog);
                         }
                     }
                 }
@@ -42,7 +42,6 @@ namespace ServiceOnset
         }
 
         #endregion
-
         #region Config singleton
 
         private static IServiceOnsetConfig _config;
@@ -57,16 +56,7 @@ namespace ServiceOnset
                     {
                         if (_config == null)
                         {
-                            string configPath = AppHelper.AppPath + ".json"; // ServiceOnset.exe.json
-                            try
-                            {
-                                _config = ServiceOnsetConfig.Create(configPath);
-                            }
-                            catch (Exception exception)
-                            {
-                                AppHelper.Log.Error("Load config \"" + configPath + "\" failed --->", exception);
-                                throw;
-                            }
+                            _config = ServiceOnsetConfig.Create(AppHelper.AppPath + ".json"); // ServiceOnset.exe.json
                         }
                     }
                 }

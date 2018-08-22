@@ -66,15 +66,7 @@ namespace ServiceOnset.Services
         public LaunchService(IServiceStartInfo startInfo)
             : base(startInfo)
         {
-            this.InnerProcess = new Process();
-            this.InnerProcess.StartInfo.UseShellExecute = startInfo.UseShellExecute;
-
-            this.InnerProcess.StartInfo.FileName = startInfo.Command;
-            this.InnerProcess.StartInfo.Arguments = startInfo.Arguments;
-            this.InnerProcess.StartInfo.WorkingDirectory = startInfo.WorkingDirectory;
-            this.Log.Info("InnerProcess is created");
-
-            this.ResolveProcessBeforeStart(this.InnerProcess);
+            this.InnerProcess = CreateProcess(startInfo);
         }
 
         protected override void ThreadProc()
@@ -84,7 +76,7 @@ namespace ServiceOnset.Services
                 try
                 {
                     this.InnerProcess.Start();
-                    this.EnableOutputRedirection(this.InnerProcess);
+                    EnableOutputRedirection(this.InnerProcess);
 
                     this.InnerProcess.WaitForExit();
                 }
@@ -100,7 +92,7 @@ namespace ServiceOnset.Services
                 }
                 finally
                 {
-                    this.DisableOutputRedirection(this.InnerProcess);
+                    DisableOutputRedirection(this.InnerProcess);
                 }
             }
         }
