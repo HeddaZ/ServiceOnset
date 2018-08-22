@@ -65,46 +65,36 @@ Uninstallation
 #### Sample
 ```json
 {
-	"enableLog": true,
-	"services": [
-		{
-			"name": "PingBaidu",
-			"command": "ping",
-			"arguments": "www.baidu.com",
-			"workingDirectory": "",
-			"runMode": "interval",
-			"intervalInSeconds": 10,
-			"useShellExecute": false,
-			"killExistingProcess": false,
-			"enableLog": true
-		},
-        {
-            "name": "mywin_AppPath",
-            "command": "mywin",
-            "killExistingProcess": true
-        },
-        {
-			"name": "mywin_RelativePath",
-            "command": "test\\mywin.exe",
-            "runMode": "interval",
-			"killExistingProcess": true
-		}
-	]
+  "services": [
+    {
+      "name": "Ping-Baidu",
+      "command": "ping",
+      "arguments": "www.baidu.com",
+      "workingDirectory": "",
+      "runMode": "interval",
+      "intervalInSeconds": 10,
+      "useShellExecute": false,
+      "hideWindow": false,
+      "killExistingProcess": false,
+      "enableLog": true
+    }
+  ]
 }
 ```
 #### References
 |Property			|Value type	|Required	|Default	|Description|
 |--------			|------		|-------	|-------	|-----------|
-|enableLog			|bool		|			|false		|Determinate if generate logs by `log4net`|
-|services			|array		|Yes		|(empty)	|Program definitions hosted by `ServiceOnset`|
-|name				|string		|Yes		|			|Program identifier, must be same to the corresponding logger name|
-|command			|string		|Yes		|			|Command (with full path, relative path ([Issue #5]) or Windows ENV path). eg.: `ping`|
-|arguments			|string		|			|""			|Command arguments. eg.: `www.baidu.com`|
-|workingDirectory	|string		|			|Command path, or ServiceOnset path			|Working directory. eg.: `D:\\ServiceOnset\\`|
-|runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited<br/>`"launch"`: Launch the program once and let it be<br/>`"interval"`: Restart the program termly by force kill the running process|
-|intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode|
-|useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`|
-|killExistingProcess|bool		|			|false		|If `true`, will try to kill the existing process whose file name equals [Command] when initializing the service entry. Here any error will be ignored except logging|
+|enableLog			|bool		|			|false		|Determinate if generate logs by `log4net`.|
+|services			|array		|Yes		|(empty)	|Program definitions hosted by `ServiceOnset`.|
+|name				|string		|Yes		|			|Program identifier, must be same to the corresponding logger name.|
+|command			|string		|Yes		|			|Command (with full path, relative path ([Issue #5]) or Windows ENV path). eg.: `ping`.|
+|arguments			|string		|			|""			|Command arguments. eg.: `www.baidu.com`.|
+|workingDirectory	|string		|			|Command path, or ServiceOnset path			|It represents the startup path of the command. eg.: `D:\\ServiceOnset\\`.|
+|runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited.<br/>`"launch"`: Launch the program once and let it be.<br/>`"interval"`: Restart the program termly by force kill the running process.|
+|intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode.|
+|useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`.|
+|hideWindow	        |bool		|			|false		|Try to hide the window of the command.|
+|killExistingProcess|bool		|			|false		|If `true`, will try to kill the existing process whose file name equals [Command] when initializing the service entry. Here any error will be ignored except logging.|
 
 Case sample for [COW]
 ---------------------

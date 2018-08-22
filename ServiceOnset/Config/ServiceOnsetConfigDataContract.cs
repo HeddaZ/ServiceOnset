@@ -9,8 +9,6 @@ namespace ServiceOnset.Config
     [DataContract]
     public partial class ServiceOnsetConfig
     {
-        [DataMember(Name = "enableLog")]
-        private bool _originalEnableLog;
         [DataMember(Name = "services")]
         private ServiceStartInfo[] _originalStartInfos;
     }
@@ -32,6 +30,8 @@ namespace ServiceOnset.Config
         private int _originalIntervalInSeconds;
         [DataMember(Name = "useShellExecute")]
         private bool _originalUseShellExecute;
+        [DataMember(Name = "hideWindow")]
+        private bool _originalHideWindow;
         [DataMember(Name = "killExistingProcess")]
         private bool _originalKillExistingProcess;
         [DataMember(Name = "enableLog")]

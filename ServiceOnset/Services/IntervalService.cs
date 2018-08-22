@@ -85,7 +85,7 @@ namespace ServiceOnset.Services
                 try
                 {
                     this.InnerProcess.Start();
-                    this.ResolveProcessAfterStart(this.InnerProcess);
+                    this.EnableOutputRedirection(this.InnerProcess);
 
                     Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
                 }
@@ -97,7 +97,7 @@ namespace ServiceOnset.Services
                 }
                 finally
                 {
-                    this.ResolveProcessAfterExit(this.InnerProcess);
+                    this.DisableOutputRedirection(this.InnerProcess);
 
                     try
                     {

@@ -104,9 +104,9 @@ namespace ServiceOnset.Services
 
             if (startInfo.KillExistingProcess)
             {
-                Process.GetProcesses().Where(p => this.TryMatchProcess(p, startInfo.Command))
+                Process.GetProcesses().Where(p => TryMatchProcess(p, startInfo.Command))
                     .ToList()
-                    .ForEach(p => this.TryKillProcess(p));
+                    .ForEach(p => TryKillProcess(p));
             }
         }
 
@@ -139,6 +139,11 @@ namespace ServiceOnset.Services
                 {
                     this.Log.Info("InnerProcess output: " + e.Data);
                 });
+
+            }
+            else
+            {
+
             }
 
             if (string.IsNullOrEmpty(Path.GetExtension(process.StartInfo.FileName)))
@@ -150,7 +155,8 @@ namespace ServiceOnset.Services
                 process.StartInfo.FileName = Path.Combine(process.StartInfo.WorkingDirectory, Path.GetFileName(process.StartInfo.FileName));
             }
         }
-        protected void ResolveProcessAfterStart(Process process)
+
+        protected static void EnableOutputRedirection(Process process)
         {
             try
             {
@@ -165,7 +171,7 @@ namespace ServiceOnset.Services
             }
             catch { }
         }
-        protected void ResolveProcessAfterExit(Process process)
+        protected static void DisableOutputRedirection(Process process)
         {
             try
             {
@@ -180,8 +186,7 @@ namespace ServiceOnset.Services
             }
             catch { }
         }
-
-        private bool TryMatchProcess(Process process, string command)
+        protected static bool TryMatchProcess(Process process, string command)
         {
             try
             {
@@ -195,7 +200,7 @@ namespace ServiceOnset.Services
                 return false;
             }
         }
-        private void TryKillProcess(Process process)
+        protected static void TryKillProcess(Process process)
         {
             try
             {
@@ -221,16 +226,14 @@ namespace ServiceOnset.Services
                             killer.StartInfo.FileName = ntsdCommand;
                             killer.StartInfo.Arguments = string.Format(ntsdArguments, process.Id);
                         }
+                        killer.StartInfo.UseShellExecute = true;
                         killer.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         killer.Start();
                         killer.WaitForExit();
                         killer.Close();
                     }
                 }
-                catch (Exception exception)
-                {
-                    this.Log.Error("TryKillProcess error but resumed --->", exception);
-                }
+                catch { }
             }
         }
 

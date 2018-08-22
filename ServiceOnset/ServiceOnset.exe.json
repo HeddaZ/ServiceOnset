@@ -2,26 +2,16 @@
   "enableLog": true,
   "services": [
     {
-      "name": "PingBaidu",
+      "name": "Ping-Baidu",
       "command": "ping",
       "arguments": "www.baidu.com",
       "workingDirectory": "",
       "runMode": "interval",
       "intervalInSeconds": 10,
       "useShellExecute": false,
+      "hideWindow": false,
       "killExistingProcess": false,
       "enableLog": true
-    },
-    {
-      "name": "mywin_AppPath",
-      "command": "mywin",
-      "killExistingProcess": true
-    },
-    {
-      "name": "mywin_RelativePath",
-      "command": "test\\mywin.exe",
-      "runMode": "interval",
-      "killExistingProcess": true
     }
   ]
 }

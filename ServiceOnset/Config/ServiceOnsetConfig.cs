@@ -10,7 +10,6 @@ namespace ServiceOnset.Config
 {
     public interface IServiceOnsetConfig
     {
-        bool EnableLog { get; }
         IServiceStartInfo[] StartInfos { get; }
     }
     public partial class ServiceOnsetConfig : IServiceOnsetConfig
@@ -39,19 +38,6 @@ namespace ServiceOnset.Config
 
         private ServiceOnsetConfig()
         {
-        }
-
-        private bool? _enableLog;
-        public bool EnableLog
-        {
-            get
-            {
-                if (!_enableLog.HasValue)
-                {
-                    _enableLog = _originalEnableLog;
-                }
-                return _enableLog.Value;
-            }
         }
 
         private IServiceStartInfo[] _startInfos;
@@ -84,6 +70,7 @@ namespace ServiceOnset.Config
         ServiceRunMode RunMode { get; }
         int IntervalInSeconds { get; }
         bool UseShellExecute { get; }
+        bool HideWindow { get; }
         bool KillExistingProcess { get; }
         bool EnableLog { get; }
     }
@@ -233,6 +220,19 @@ namespace ServiceOnset.Config
                     _useShellExecute = _originalUseShellExecute;
                 }
                 return _useShellExecute.Value;
+            }
+        }
+
+        private bool? _hideWindow;
+        public bool HideWindow
+        {
+            get
+            {
+                if (!_hideWindow.HasValue)
+                {
+                    _hideWindow = _originalHideWindow;
+                }
+                return _hideWindow.Value;
             }
         }
 
