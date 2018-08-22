@@ -67,7 +67,7 @@ namespace ServiceOnset.Services
         public IntervalService(IServiceStartInfo startInfo)
             : base(startInfo)
         {
-            this.InnerProcess = CreateProcess(startInfo);
+            this.InnerProcess = CreateProcess();
         }
 
         protected override void ThreadProc()

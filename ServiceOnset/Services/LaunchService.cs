@@ -66,7 +66,7 @@ namespace ServiceOnset.Services
         public LaunchService(IServiceStartInfo startInfo)
             : base(startInfo)
         {
-            this.InnerProcess = CreateProcess(startInfo);
+            this.InnerProcess = CreateProcess();
         }
 
         protected override void ThreadProc()
