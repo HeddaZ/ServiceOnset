@@ -8,7 +8,7 @@ namespace ServiceOnset
 {
     public class Logger
     {
-        private const string DefaultLoggerName = "Default";
+        private const string RootLoggerName = "root";
 
         public ILog InnerLogger
         {
@@ -23,11 +23,11 @@ namespace ServiceOnset
 
         internal Logger(string name, bool enabled)
         {
-            this.InnerLogger = LogManager.GetLogger(name);
-            this.Enabled = enabled && AppHelper.Config.EnableLog;
+            InnerLogger = LogManager.GetLogger(name);
+            Enabled = enabled && AppHelper.Config.EnableLog;
         }
         internal Logger(bool enabled)
-            : this(DefaultLoggerName, enabled)
+            : this(RootLoggerName, enabled)
         {
         }
 
@@ -35,45 +35,45 @@ namespace ServiceOnset
 
         public void Info(string format, params object[] args)
         {
-            if (this.Enabled)
+            if (Enabled)
             {
-                this.InnerLogger.InfoFormat(format, args);
+                InnerLogger.InfoFormat(format, args);
             }
         }
         public void Info(string message)
         {
-            if (this.Enabled)
+            if (Enabled)
             {
-                this.InnerLogger.Info(message);
+                InnerLogger.Info(message);
             }
         }
         public void Info(string message, Exception exception)
         {
-            if (this.Enabled)
+            if (Enabled)
             {
-                this.InnerLogger.Info(message, exception);
+                InnerLogger.Info(message, exception);
             }
         }
 
         public void Error(string format, params object[] args)
         {
-            if (this.Enabled)
+            if (Enabled)
             {
-                this.InnerLogger.ErrorFormat(format, args);
+                InnerLogger.ErrorFormat(format, args);
             }
         }
         public void Error(string message)
         {
-            if (this.Enabled)
+            if (Enabled)
             {
-                this.InnerLogger.Error(message);
+                InnerLogger.Error(message);
             }
         }
         public void Error(string message, Exception exception)
         {
-            if (this.Enabled)
+            if (Enabled)
             {
-                this.InnerLogger.Error(message, exception);
+                InnerLogger.Error(message, exception);
             }
         }
 
