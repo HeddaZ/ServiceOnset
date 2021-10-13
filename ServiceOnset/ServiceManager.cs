@@ -21,7 +21,7 @@ namespace ServiceOnset
                 .Where(s => !s.Disable)
                 .Select(s => ServiceFactory.Instance.Create(s))
                 .ToList();
-            AppHelper.Log.Info("{0} service(s) initialized: {1}",
+            AppHelper.Log.Info("{0} service(s) initialized. {1}",
                 Services.Count,
                 string.Join(", ", Services.Select(s => s.StartInfo.Name + "(" + s.StartInfo.RunMode.ToString() + ")").ToArray()));
         }
