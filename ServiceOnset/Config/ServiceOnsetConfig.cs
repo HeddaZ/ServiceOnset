@@ -77,7 +77,9 @@ namespace ServiceOnset.Config
 
     public interface IServiceStartInfo
     {
+        bool Disable { get; }
         string Name { get; }
+        string Description { get; }
         string Command { get; }
         string Arguments { get; }
         string WorkingDirectory { get; }
@@ -90,6 +92,19 @@ namespace ServiceOnset.Config
     }
     public partial class ServiceStartInfo : IServiceStartInfo
     {
+        private bool? _disable;
+        public bool Disable
+        {
+            get
+            {
+                if (!_disable.HasValue)
+                {
+                    _disable = _originalDisable;
+                }
+                return _disable.Value;
+            }
+        }
+
         private string _name;
         public string Name
         {
@@ -107,6 +122,19 @@ namespace ServiceOnset.Config
                     }
                 }
                 return _name;
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                if (_description == null)
+                {
+                    _description = _originalDescription;
+                }
+                return _description;
             }
         }
 
@@ -179,7 +207,7 @@ namespace ServiceOnset.Config
                 if (_workingDirectory == null)
                 {
                     _workingDirectory = string.IsNullOrWhiteSpace(_originalWorkingDirectory)
-                        ? Path.GetDirectoryName(this.Command)
+                        ? Path.GetDirectoryName(Command)
                         : (Path.IsPathRooted(_originalWorkingDirectory)
                             ? _originalWorkingDirectory
                             : Path.Combine(AppHelper.AppDirectory, _originalWorkingDirectory));
@@ -195,10 +223,13 @@ namespace ServiceOnset.Config
             {
                 if (!_runMode.HasValue)
                 {
-                    ServiceRunMode value;
-                    if (Enum.TryParse<ServiceRunMode>(_originalRunMode, true, out value))
+                    if (int.TryParse(_originalRunMode, out int runModeValue))
                     {
-                        _runMode = value;
+                        _runMode = (ServiceRunMode)runModeValue;
+                    }
+                    else if (Enum.TryParse(_originalRunMode, true, out ServiceRunMode runModeEnum))
+                    {
+                        _runMode = runModeEnum;
                     }
                     else
                     {

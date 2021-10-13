@@ -16,17 +16,17 @@ namespace ServiceOnset
         public ServiceHost()
         {
             InitializeComponent();
-            this.ServiceManager = new ServiceManager(AppHelper.Config);
+            ServiceManager = new ServiceManager(AppHelper.Config);
         }
 
         protected override void OnStart(string[] args)
         {
-            this.ServiceManager.RunServices();
+            ServiceManager.RunServices();
         }
 
         protected override void OnStop()
         {
-            this.ServiceManager.StopServices();
+            ServiceManager.StopServices();
         }
     }
 }

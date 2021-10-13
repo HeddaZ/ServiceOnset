@@ -15,24 +15,24 @@ namespace ServiceOnset.Services
         private bool disposed = false;
         protected override void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     #region Dispose managed resources
 
-                    if (this.InnerProcess != null)
+                    if (InnerProcess != null)
                     {
                         try
                         {
-                            this.InnerProcess.Dispose();
+                            InnerProcess.Dispose();
                         }
                         catch
                         {
                         }
                         finally
                         {
-                            this.InnerProcess = null;
+                            InnerProcess = null;
                         }
                     }
 
@@ -45,7 +45,7 @@ namespace ServiceOnset.Services
 
                 #endregion
 
-                this.disposed = true;
+                disposed = true;
             }
 
             base.Dispose(disposing);
@@ -53,7 +53,7 @@ namespace ServiceOnset.Services
 
         ~DaemonService()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         #endregion
@@ -67,36 +67,36 @@ namespace ServiceOnset.Services
         public DaemonService(IServiceStartInfo startInfo)
             : base(startInfo)
         {
-            this.InnerProcess = CreateProcess();
+            InnerProcess = CreateProcess();
         }
 
         protected override void ThreadProc()
         {
-            while (this.IsRunning)
+            while (IsRunning)
             {
                 try
                 {
-                    this.InnerProcess.Start();
-                    EnableOutputRedirection(this.InnerProcess);
+                    InnerProcess.Start();
+                    EnableOutputRedirection(InnerProcess);
 
-                    this.InnerProcess.WaitForExit();
+                    InnerProcess.WaitForExit();
                 }
                 catch (Exception exception)
                 {
-                    this.Log.Error("ThreadProc error --->", exception);
+                    Log.Error("ThreadProc error --->", exception);
 
                     try
                     {
-                        this.InnerProcess.Kill();
+                        InnerProcess.Kill();
                     }
                     catch { }
                 }
                 finally
                 {
-                    DisableOutputRedirection(this.InnerProcess);
+                    DisableOutputRedirection(InnerProcess);
                 }
 
-                Thread.Sleep(this.StartInfo.IntervalInSeconds * 1000);
+                Thread.Sleep(StartInfo.IntervalInSeconds * 1000);
             }
         }
 
@@ -110,7 +110,7 @@ namespace ServiceOnset.Services
 
             try
             {
-                this.InnerProcess.Kill();
+                InnerProcess.Kill();
             }
             catch { }
         }

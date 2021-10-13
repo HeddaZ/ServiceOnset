@@ -5,10 +5,10 @@ using System.Text;
 
 namespace ServiceOnset.Config
 {
-    public enum ServiceRunMode
+    public enum ServiceRunMode : int
     {
-        Daemon,
-        Launch,
-        Interval
+        Daemon = 1,
+        Launch = 2,
+        Interval = 4
     }
 }

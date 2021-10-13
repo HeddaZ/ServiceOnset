@@ -18,8 +18,12 @@ namespace ServiceOnset.Config
     [DataContract]
     public partial class ServiceStartInfo
     {
+        [DataMember(Name = "disable")]
+        private bool _originalDisable;
         [DataMember(Name = "name")]
         private string _originalName;
+        [DataMember(Name = "desc")]
+        private string _originalDescription;
         [DataMember(Name = "command")]
         private string _originalCommand;
         [DataMember(Name = "arguments")]

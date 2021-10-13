@@ -17,22 +17,23 @@ namespace ServiceOnset
 
         public ServiceManager(IServiceOnsetConfig config)
         {
-            this.Services = config.StartInfos
+            Services = config.StartInfos
+                .Where(s => !s.Disable)
                 .Select(s => ServiceFactory.Instance.Create(s))
                 .ToList();
             AppHelper.Log.Info("{0} service(s) initialized: {1}",
-                this.Services.Count,
-                string.Join(", ", this.Services.Select(s => s.StartInfo.Name + "(" + s.StartInfo.RunMode.ToString() + ")").ToArray()));
+                Services.Count,
+                string.Join(", ", Services.Select(s => s.StartInfo.Name + "(" + s.StartInfo.RunMode.ToString() + ")").ToArray()));
         }
 
         public void RunServices()
         {
-            this.Services.ForEach(s => s.Start());
+            Services.ForEach(s => s.Start());
             AppHelper.Log.Info(AppHelper.AppTitle + " started");
         }
         public void StopServices()
         {
-            this.Services.ForEach(s => s.Stop());
+            Services.ForEach(s => s.Stop());
             AppHelper.Log.Info(AppHelper.AppTitle + " stopped");
         }
     }

@@ -29,20 +29,18 @@ Installation
 * `Optional.` Change the config of log4net if you want assign a dedicated logger for a service. Refer to [log4net Config]
 
 ```xml
-<log4net>
-  <root>
-    <appender-ref ref="Default" />
-  </root>
-  <appender name="Default" type="log4net.Appender.RollingFileAppender">
-    <file value="logs/log" />
-    <appendToFile value="true" />
-    <rollingStyle value="Date" />
-    <datePattern value="yyyyMMdd&quot;.log&quot;" />
-    <layout type="log4net.Layout.PatternLayout">
-      <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
-    </layout>
-  </appender>
-</log4net>
+<logger name="{YourService}" additivity="false">
+	<appender-ref ref="{YourService}Appender" />
+</logger>
+<appender name="{YourService}Appender" type="log4net.Appender.RollingFileAppender">
+	<param name="File" value="logs/{YourService}/log" />
+	<param name="AppendToFile" value="true" />
+	<param name="RollingStyle" value="Date" />
+	<param name="DatePattern" value="yyyyMM&quot;.txt&quot;" />
+	<layout type="log4net.Layout.PatternLayout">
+		<param name="ConversionPattern" value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+	</layout>
+</appender>
 ```
 
 * `Optional.` If you are trying to launch a desktop-related program, you may need to create these 2 folders.
@@ -68,7 +66,9 @@ Uninstallation
   "enableLog": true,
   "services": [
     {
+      "disable": false,
       "name": "Ping-Baidu",
+      "desc": "Termly PING www.baidu.com",
       "command": "ping",
       "arguments": "www.baidu.com",
       "workingDirectory": "",
@@ -87,7 +87,9 @@ Uninstallation
 |--------			|------		|-------	|-------	|-----------|
 |enableLog			|bool		|			|false		|Determinate if generate logs by `log4net`.|
 |services			|array		|Yes		|(empty)	|Program definitions hosted by `ServiceOnset`.|
+|disable			|bool		|			|false		|Determinate if the service is enabled.|
 |name				|string		|Yes		|			|Program identifier, must be same to the corresponding logger name.|
+|desc				|string		|		    |			|Service description.|
 |command			|string		|Yes		|			|Command (with full path, relative path ([Issue #5]) or Windows ENV path). eg.: `ping`.|
 |arguments			|string		|			|""			|Command arguments. eg.: `www.baidu.com`.|
 |workingDirectory	|string		|			|Command path, or ServiceOnset path			|It represents the startup path of the command. eg.: `D:\\ServiceOnset\\`.|
