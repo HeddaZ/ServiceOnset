@@ -30,16 +30,17 @@ Installation
 
 ```xml
 <logger name="{YourService}" additivity="false">
-	<appender-ref ref="{YourService}Appender" />
+    <appender-ref ref="{YourService}Appender" />
 </logger>
 <appender name="{YourService}Appender" type="log4net.Appender.RollingFileAppender">
-	<param name="File" value="logs/{YourService}/log" />
-	<param name="AppendToFile" value="true" />
-	<param name="RollingStyle" value="Date" />
-	<param name="DatePattern" value="yyyyMM&quot;.txt&quot;" />
-	<layout type="log4net.Layout.PatternLayout">
-		<param name="ConversionPattern" value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
-	</layout>
+    <param name="File" value="logs/{YourService}/log" />
+    <param name="Encoding" value="utf-8" />
+    <param name="AppendToFile" value="true" />
+    <param name="RollingStyle" value="Date" />
+    <param name="DatePattern" value="yyyyMM&quot;.txt&quot;" />
+    <layout type="log4net.Layout.PatternLayout">
+        <param name="ConversionPattern" value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+    </layout>
 </appender>
 ```
 
