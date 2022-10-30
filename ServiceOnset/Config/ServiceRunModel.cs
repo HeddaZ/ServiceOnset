@@ -9,6 +9,7 @@ namespace ServiceOnset.Config
     {
         Daemon = 1,
         Launch = 2,
-        Interval = 4
+        Interval = 4,
+        Timing = 8
     }
 }

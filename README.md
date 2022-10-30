@@ -74,7 +74,8 @@ Uninstallation
       "arguments": "www.baidu.com",
       "workingDirectory": "",
       "runMode": "interval",
-      "intervalInSeconds": 10,
+      "intervalInSeconds": 30,
+      "timingExp": "00",
       "useShellExecute": false,
       "hideWindow": false,
       "killExistingProcess": false,
@@ -94,8 +95,9 @@ Uninstallation
 |command			|string		|Yes		|			|Command (with full path, relative path ([Issue #5]) or Windows ENV path). eg.: `ping`.|
 |arguments			|string		|			|""			|Command arguments. eg.: `www.baidu.com`.|
 |workingDirectory	|string		|			|Command path, or ServiceOnset path			|It represents the startup path of the command. eg.: `D:\\ServiceOnset\\`.|
-|runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited.<br/>`"launch"`: Launch the program once and let it be.<br/>`"interval"`: Restart the program termly by force kill the running process.|
+|runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited.<br/>`"launch"`: Launch the program once and let it be.<br/>`"interval"`: Restart the program termly by force kill the running process.<br/>`"timing"`: Check current time per 60 seconds, run the program when matching with timingExp.|
 |intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode.|
+|timingExp	        |string		|			|"00"		|Expression format: `MMddHHmm`. eg.: `01022300` - run at 23:00 on Jan 2nd of every year; `101330` - run at 13:30 on the 10th day of every month; `2205` - run at 22:05 of every day; `15` - run at the 15th minute of every hour.|
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`.|
 |hideWindow	        |bool		|			|false		|Try to hide the window of the command.|
 |killExistingProcess|bool		|			|false		|If `true`, will try to kill the existing process whose file name equals [Command] when initializing the service entry. Here any error will be ignored except logging.|
@@ -110,7 +112,7 @@ Case sample for [COW]
   "services": [
     {
       "name": "COW-Proxy",
-      "command": "cow.exe"
+      "command": "cow"
     }
   ]
 }

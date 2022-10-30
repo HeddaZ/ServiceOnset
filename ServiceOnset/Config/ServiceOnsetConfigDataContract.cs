@@ -34,6 +34,8 @@ namespace ServiceOnset.Config
         private string _originalRunMode;
         [DataMember(Name = "intervalInSeconds")]
         private int _originalIntervalInSeconds;
+        [DataMember(Name = "timingExp")]
+        private string _originalTimingExp;
         [DataMember(Name = "useShellExecute")]
         private bool _originalUseShellExecute;
         [DataMember(Name = "hideWindow")]

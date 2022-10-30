@@ -85,6 +85,7 @@ namespace ServiceOnset.Config
         string WorkingDirectory { get; }
         ServiceRunMode RunMode { get; }
         int IntervalInSeconds { get; }
+        string TimingExp { get; }
         bool UseShellExecute { get; }
         bool HideWindow { get; }
         bool KillExistingProcess { get; }
@@ -252,6 +253,21 @@ namespace ServiceOnset.Config
                         : _originalIntervalInSeconds;
                 }
                 return _intervalInSeconds.Value;
+            }
+        }
+
+        private string _timingExp;
+        public string TimingExp
+        {
+            get
+            {
+                if (_timingExp == null)
+                {
+                    _timingExp = string.IsNullOrWhiteSpace(_originalTimingExp)
+                        ? "00"
+                        : _originalTimingExp;
+                }
+                return _timingExp;
             }
         }
 

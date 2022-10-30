@@ -45,6 +45,8 @@ namespace ServiceOnset.Services
                     return new LaunchService(startInfo);
                 case ServiceRunMode.Interval:
                     return new IntervalService(startInfo);
+                case ServiceRunMode.Timing:
+                    return new TimingService(startInfo);
 
                 default:
                     throw new ArgumentOutOfRangeException("runMode");
