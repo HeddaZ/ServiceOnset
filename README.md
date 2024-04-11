@@ -8,7 +8,7 @@ Known [Issue #7]. ServiceOnset currently CANNOT support an UI-based program beca
 
 Prerequisites
 -------------
-Windows operation with [Microsoft .NET Framework 4.0]
+Windows operation with [Microsoft .NET Framework 4.5.2]
 
 Installation
 ------------
@@ -123,7 +123,7 @@ Case sample for [COW]
 
 [Node.js]: http://nodejs.org/
 [COW]: https://github.com/cyfdecyf/cow
-[Microsoft .NET Framework 4.0]: http://www.microsoft.com/zh-cn/download/details.aspx?id=17718
+[Microsoft .NET Framework 4.5.2]: http://www.microsoft.com/zh-cn/download/details.aspx?id=17718
 [DOWNLOAD]: https://github.com/HeddaZ/ServiceOnset/releases
 [log4net Config]: http://logging.apache.org/log4net/release/config-examples.html
 [UseShellExecute]: http://msdn.microsoft.com/en-us/library/system.diagnostics.processstartinfo.useshellexecute.aspx
