@@ -96,7 +96,7 @@ namespace ServiceOnset.Services
                     InnerProcess.Start();
                     EnableOutputRedirection(InnerProcess);
 
-                    Thread.Sleep(60000);
+                    Thread.Sleep(StartInfo.IntervalInSeconds * 1000);
                 }
                 catch (Exception exception)
                 {
