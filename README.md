@@ -96,7 +96,7 @@ Uninstallation
 |arguments			|string		|			|""			|Command arguments. eg.: `www.baidu.com`.|
 |workingDirectory	|string		|			|Command path, or ServiceOnset path			|It represents the startup path of the command. eg.: `D:\\ServiceOnset\\`.|
 |runMode			|enum 		|			|"daemon"	|`"daemon"`: Auto-restart the program if it exited.<br/>`"launch"`: Launch the program once and let it be.<br/>`"interval"`: Restart the program termly by force kill the running process.<br/>`"timing"`: Check current time per 60 seconds, run the program when matching with timingExp.|
-|intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode.|
+|intervalInSeconds	|int		|			|30			|Detecting interval in seconds for current run mode. This also indicates the lifecycle of command execution for `"interval"` and `"timing"`.|
 |timingExp	        |string		|			|"00"		|Expression format: `MMddHHmm`. eg.: `01022300` - run at 23:00 on Jan 2nd of every year; `101330` - run at 13:30 on the 10th day of every month; `2205` - run at 22:05 of every day; `15` - run at the 15th minute of every hour.|
 |useShellExecute	|bool		|			|false		|Start a process by [UseShellExecute]. Will omit the standard output of a console when the value is `true`.|
 |hideWindow	        |bool		|			|false		|Try to hide the window of the command.|
